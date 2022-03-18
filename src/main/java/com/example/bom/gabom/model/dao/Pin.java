@@ -1,12 +1,14 @@
-package com.example.bom.gabom.dao;
+package com.example.bom.gabom.model.dao;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import  javax.persistence.Id;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -14,7 +16,8 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Repository
-public class Pin {
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class Pin{
 
     @Id
     @Column(name = "pin_id")

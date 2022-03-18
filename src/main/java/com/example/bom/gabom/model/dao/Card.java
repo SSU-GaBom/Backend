@@ -1,22 +1,22 @@
-package com.example.bom.gabom.dao;
+package com.example.bom.gabom.model.dao;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import  javax.persistence.Id;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Repository
-public class Card {
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class Card{
 
     @Id
     @Column(name = "card_id")
