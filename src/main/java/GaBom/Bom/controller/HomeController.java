@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/home")
 public class HomeController {
 
     @Autowired
     UserRepository userRepository;
+
 
     @PostMapping("/list")
     public String MakeUser(@RequestBody User user){
@@ -26,6 +27,12 @@ public class HomeController {
     public List<User> UserList(){
         List<User> users = userRepository.findAll();
         return users;
+    }
+
+    @DeleteMapping("/list/{user_id}")
+    public String one(@PathVariable Long user_id) {
+        userRepository.deleteById(user_id);
+        return "Deleted id : "+user_id;
     }
 
 //    @DeleteMapping("/list/{user_id}")

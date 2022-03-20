@@ -36,11 +36,10 @@ public class Board {
 
     private Long price;
 
-    //User 테이블과의 연결
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    //Board -> User로 참조할때 더 긁지 않기위해서 LAZY
-//    @JoinColumn(name="user_id")
-//    private User user;
+    @ManyToOne(fetch=FetchType.LAZY)
+    //Board -> User로 참조할때 더 긁지 않기위해서 LAZY
+    @JoinColumn(name="user_id")
+    private User user;
 
 
     public Board(Long board_id, String title, String comment, String startDateString, String endDateString, Long price) throws ParseException {
