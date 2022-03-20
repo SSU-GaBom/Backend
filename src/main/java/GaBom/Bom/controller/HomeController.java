@@ -3,6 +3,7 @@ package GaBom.Bom.controller;
 import GaBom.Bom.model.Board;
 import GaBom.Bom.model.User;
 import GaBom.Bom.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -11,10 +12,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/home")
+@RequiredArgsConstructor
 public class HomeController {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
 
     @PostMapping("/list")

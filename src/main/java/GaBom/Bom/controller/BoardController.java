@@ -2,6 +2,7 @@ package GaBom.Bom.controller;
 
 import GaBom.Bom.model.Board;
 import GaBom.Bom.repository.BoardRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
 
-    @Autowired
-    private BoardRepository boardRepository;
+    private final BoardRepository boardRepository;
 
 
     @GetMapping("/list")
