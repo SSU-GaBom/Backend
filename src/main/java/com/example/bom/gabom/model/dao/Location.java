@@ -20,4 +20,5 @@ import java.io.Serializable;
 public class Location{
     @Id
     private String id;
+    private String
 }

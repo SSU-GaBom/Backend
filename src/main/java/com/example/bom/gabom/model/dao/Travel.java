@@ -33,5 +33,4 @@ public class Travel{
 
     private String title;
     private boolean isShared;
-
 }
