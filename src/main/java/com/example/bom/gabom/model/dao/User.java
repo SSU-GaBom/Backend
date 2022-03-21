@@ -9,6 +9,7 @@ import org.apache.catalina.Store;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class User{
     private String password;
     //이메일
     @NotNull
+    @Email
     private String email;
     //유저 실명
     @NotNull
