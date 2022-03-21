@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -18,24 +17,31 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Repository
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+//@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Location{
 
-    //도로명 주소 or 지번 주소
     @Id
+    @NotNull
+    @GeneratedValue
+    @Column(name = "location_id")
+    private Integer locationId;
+
+    //도로명 주소 or 지번 주소
+    @NotNull
     private String address;
 
     //가게 이름이 있는 경우 넣음. (null 가능)
-    private String id;
+    private String name;
 
     //위도
-    private Integer latitude;
+    @NotNull
+    private Float latitude;
 
     //경도
-    private Integer longitude;
+    @NotNull
+    private Float longitude;
 
-    //지역 하나를 여러 사람들이 올렸을 수 있음.
-    @OneToMany
-    private List<Pin> pinList;
+    //이 두개는 보류
+    private Integer city;
+    private Integer state;
 }

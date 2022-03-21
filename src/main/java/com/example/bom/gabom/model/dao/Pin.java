@@ -14,23 +14,25 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Repository
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+//@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Pin{
 
     @Id
     @Column(name = "pin_id")
     //Pin의 번호는 "트레블 ID" + "인덱스"
-    private String pinId;
+    private Integer pinId;
 
+    //단방향 다대1
     @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
-    //이게 맞는지 모르겠네
+    //양방향 다대1
     @ManyToOne
     @JoinColumn(name = "travel_id")
     private Travel travel;
 
+    //양방향 1대다
     @OneToMany(mappedBy = "pin")
     private List<Card> cardList;
 
