@@ -1,14 +1,24 @@
 plugins {
+<<<<<<< HEAD
     id 'org.springframework.boot' version '2.6.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
 }
 
 group = 'com.example.Bom'
+=======
+	id 'org.springframework.boot' version '2.6.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'GaBom'
+>>>>>>> 293e07d1402674e3155f19139ab2654a4561a0c5
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
+<<<<<<< HEAD
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -32,3 +42,29 @@ dependencies {
 tasks.named('test') {
     useJUnitPlatform()
 }
+=======
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client'
+//	, version: '3.0.2-rc'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+>>>>>>> 293e07d1402674e3155f19139ab2654a4561a0c5
