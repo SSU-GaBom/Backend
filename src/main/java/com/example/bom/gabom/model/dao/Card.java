@@ -27,7 +27,10 @@ public class Card{
     @JoinColumn(name = "pin_id")
     private Pin pin;
 
+    //카드의 본문 내용
     private String body;
+
+    //본문의 이미지 객체를 찾아야함.
     //private
 
 }

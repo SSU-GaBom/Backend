@@ -29,6 +29,13 @@ public class User{
     private String email;
     private String name;
 
+    //내가 쓴 리뷰 리스트
     @OneToMany(mappedBy = "user")
-    private List<Travel> travelList;
+    private List<Travel> myTravelList;
+
+    //찜을 누른 리뷰 리스트
+    private List<Travel> likedTravelList;
+
+    //내가 분류하여 저장한 리뷰 리스트(분류 자체로 리스트여야 하고 분류 후에도 리스트여야 해서 고민 해야함.)
+    private
 }

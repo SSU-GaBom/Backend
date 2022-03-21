@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -24,6 +23,10 @@ public class Pin{
     //Pin의 번호는 "트레블 ID" + "인덱스"
     private String pinId;
 
+    @ManyToOne
+    private Location location;
+
+    //이게 맞는지 모르겠네
     @ManyToOne
     @JoinColumn(name = "travel_id")
     private Travel travel;
