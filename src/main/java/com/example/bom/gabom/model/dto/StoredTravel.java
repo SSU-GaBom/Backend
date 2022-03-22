@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.dao;
+package com.example.bom.gabom.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +14,9 @@ import java.util.List;
 public class StoredTravel {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stored_travel_id")
-    private Integer storedTravelId;
+    private Long storedTravelId;
 
     //저장할 여행 리스트
     @OneToMany

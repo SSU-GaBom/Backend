@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.dao;
+package com.example.bom.gabom.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,9 +15,9 @@ public class Follow {
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "follow_id")
-    private Integer followId;
+    private Long followId;
 
     @ManyToOne
     @JoinColumn(name = "from_user_id")
