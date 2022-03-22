@@ -1,5 +1,6 @@
 package com.example.bom.gabom.model.dto;
 
+import com.example.bom.gabom.model.vo.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +17,9 @@ import java.util.List;
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User{
 
+    //notnull로 하면 자동 생성이 안되는 중임.
     @Id
-    @NotNull
+    //@NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no")
     private Long userNo;
@@ -73,4 +75,18 @@ public class User{
     @JoinColumn(name = "stored_travel_id")
     private List<StoredTravel> storedTravelList;
      */
+
+    public void setUserField(UserDto userDto){
+        this.userId = userDto.getUserId();
+        this.userPw = userDto.getUserPw();
+        this.email = userDto.getEmail();
+        this.userName = userDto.getUserName();
+        this.userAuth = userDto.getUserAuth();
+        this.appendDate = userDto.getAppendDate();
+        this.updateDate = userDto.getUpdateDate();
+        this.profileImagePath = userDto.getProfileImagePath();
+        this.following = userDto.getFollowing();
+        this.myTravelList = userDto.getMyTravelList();
+        this.likedTravelList = userDto.getLikedTravelList();
+    }
 }
