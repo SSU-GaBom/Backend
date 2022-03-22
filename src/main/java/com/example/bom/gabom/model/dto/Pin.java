@@ -1,11 +1,8 @@
-package com.example.bom.gabom.model.dao;
+package com.example.bom.gabom.model.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,8 +16,9 @@ public class Pin{
 
     @Id
     @Column(name = "pin_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     //Pin의 번호는 "트레블 ID" + "인덱스"
-    private Integer pinId;
+    private Long pinId;
 
     //단방향 다대1
     @ManyToOne

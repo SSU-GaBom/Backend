@@ -1,12 +1,8 @@
-package com.example.bom.gabom.model.dao;
+package com.example.bom.gabom.model.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.Store;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -17,29 +13,40 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Repository
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+//@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User{
 
     @Id
     @NotNull
-    @GeneratedValue
-    @Column(name = "user_id")
-    private Integer userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_no")
+    private Long userNo;
 
     //유저가 사용할 아이디
     @NotNull
-    private String nickName;
+    private String userId;
     //비밀번호
     @NotNull
-    private String password;
+    private String userPw;
     //이메일
     @NotNull
     @Email
     private String email;
     //유저 실명
     @NotNull
-    private String realName;
+    private String userName;
+
+    //userAuth??
+    @NotNull
+    private String userAuth;
+
+    //계정 추가 시각
+    @NotNull
+    private String appendDate;
+
+    //계정 수정 시각
+    @NotNull
+    private String updateDate;
 
     //유저 프로필이 저장될 경로
     @NotNull

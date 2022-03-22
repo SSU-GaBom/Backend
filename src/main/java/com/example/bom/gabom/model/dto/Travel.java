@@ -1,14 +1,10 @@
-package com.example.bom.gabom.model.dao;
+package com.example.bom.gabom.model.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -24,13 +20,13 @@ public class Travel{
 
     @Id
     @NotNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "travel_id")
     //카드 아이디는 "UserID" + "인덱스 번호"로 하면 될 듯?
-    private Integer travelId;
+    private Long travelId;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_no")
     private User user;
 
     //리뷰 내부의 핀 리스트
