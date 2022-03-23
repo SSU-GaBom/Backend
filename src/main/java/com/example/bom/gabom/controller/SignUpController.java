@@ -1,6 +1,7 @@
 package com.example.bom.gabom.controller;
 
 import com.example.bom.gabom.model.dto.User;
+import com.example.bom.gabom.model.vo.UserDto;
 import com.example.bom.gabom.service.SignUpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,11 +11,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 
 @RestController
 @RequestMapping("/signup")
 public class SignUpController {
+
+    boolean isChecked = false;
 
     @Autowired
     SignUpService signUpService;
@@ -32,17 +36,23 @@ public class SignUpController {
             map.put("isExist", false);
             return map;
         }
+        isChecked = true;
         return map;
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody User user){
-        try {
-            //계정 생성 서비스 실행
-            signUpService.joinUser(user);
-        }catch(Exception e){
-            return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
-        }
+    public ResponseEntity register(@Valid @RequestBody UserDto userDto){
+        if(isChecked = true)
+            try {
+                //계정 생성 서비스 실행
+                    signUpService.joinUser(userDto);
+            }catch(Exception e){
+                e.printStackTrace();
+                return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+            }
+        else
+            return new ResponseEntity<>("do check id", HttpStatus.OK);
+
         return new ResponseEntity<>("success", HttpStatus.OK);
     }
 }

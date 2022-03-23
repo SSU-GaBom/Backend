@@ -1,6 +1,7 @@
 package com.example.bom.gabom.service;
 
 import com.example.bom.gabom.model.dto.User;
+import com.example.bom.gabom.model.vo.UserDto;
 import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +33,15 @@ public class SignUpService {
     }
 
     @Transactional
-    public void joinUser(User user){
+    public void joinUser(UserDto userDto){
+        User user = new User();
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        user.setUserPw(passwordEncoder.encode(user.getUserPw()));
-        user.setUserAuth("User");
-        user.setAppendDate(localTime);
-        user.setUpdateDate(localTime);
+        userDto.setUserPw(passwordEncoder.encode(userDto.getUserPw()));
+        userDto.setUserAuth("User");
+        userDto.setAppendDate(localTime);
+        userDto.setUpdateDate(localTime);
+        user.setUserField(userDto);
         userRepository.save(user);
     }
 }
