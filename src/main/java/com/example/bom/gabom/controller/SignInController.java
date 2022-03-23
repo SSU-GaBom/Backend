@@ -27,18 +27,22 @@ public class SignInController {
         if(bindingResult.hasErrors())
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 
+        //입력받은 아이디와 비밀번호
         String loginid = loginDto.getLoginId();
         String passwd = loginDto.getLoginPw();
 
         try {
+            //디비에서 검색하여 존재하면 user객체에 주입
             user = signInService.signIn(loginid, passwd);
 
+            //세션 등록
             HttpSession httpSession = httpServletRequest.getSession();
             httpSession.setAttribute(SessionConstraints.Login_User, user);
         }catch(Exception e){
             e.printStackTrace();
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>("로그인 성공했습니다.", HttpStatus.OK);
+        //주입 상태에 따라 출력값 다르게
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 }

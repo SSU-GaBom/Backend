@@ -22,9 +22,8 @@ public class SignInService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = null;
 
-        System.out.println(userRepository.findByUserId(id).getUserPw());
-
-        if(passwordEncoder.matches(userRepository.findByUserId(id).getUserPw(), passwd)){
+        //match의 parameter가 앞쪽이 raw타입, 뒤쪽이 encoded 타입이어야함.
+        if(passwordEncoder.matches(passwd, userRepository.findByUserId(id).getUserPw())){
             System.out.println("반환됐어용.");
             user = userRepository.findByUserId(id);
         }
