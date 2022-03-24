@@ -23,7 +23,7 @@ public class Board {
     //sequence가 빠르지만, 조금 관리하기 복잡함. 그래서 IDENTITY 자주씀
     //내부에서 db종류에따라서 알아서 설정됨.
     private Long board_id;
-    @NotNull
+    @NotNull //체크안한거
     @Size(min=2, max=30,message = "제목을 2~30으로 맞추도록.")
     private String title;
     private String comment;
