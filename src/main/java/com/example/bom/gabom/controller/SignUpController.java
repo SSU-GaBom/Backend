@@ -1,8 +1,8 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.dto.User;
+import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.service.SignUpService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +13,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/signup")
+@RequestMapping("/join")
+@RequiredArgsConstructor
 public class SignUpController {
 
-    @Autowired
-    SignUpService signUpService;
+    private final SignUpService signUpService;
+
+    @PostMapping("")
+    public ResponseEntity register(@RequestBody User user){
+        try {
+            //계정 생성 서비스 실행
+            signUpService.joinUser(user);
+        }catch(Exception e){
+            return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>("success", HttpStatus.OK);
+    }
+
+    @PostMapping("/validation")
+    public String func(){
+        return "validation";
+    }
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
     @PostMapping("/checkid")
@@ -35,14 +51,5 @@ public class SignUpController {
         return map;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity register(@RequestBody User user){
-        try {
-            //계정 생성 서비스 실행
-            signUpService.joinUser(user);
-        }catch(Exception e){
-            return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>("success", HttpStatus.OK);
-    }
+
 }

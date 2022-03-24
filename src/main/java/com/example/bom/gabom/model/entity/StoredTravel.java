@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.dto;
+package com.example.bom.gabom.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

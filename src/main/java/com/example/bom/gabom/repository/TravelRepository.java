@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.repository;
+package com.example.bom.gabom.repository;
 
 import com.example.bom.gabom.model.entity.Travel;
 import org.springframework.data.jpa.repository.JpaRepository;

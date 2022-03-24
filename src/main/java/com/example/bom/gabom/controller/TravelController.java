@@ -1,2 +1,51 @@
-package com.example.bom.gabom.controller;public class TravelController {
+package com.example.bom.gabom.controller;
+
+import com.example.bom.gabom.model.entity.Travel;
+import com.example.bom.gabom.service.TravelService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/travel")
+@RequiredArgsConstructor
+public class TravelController {
+
+    private final TravelService travelService;
+
+
+
+    @PostMapping("")
+    public String writeTravel(@RequestBody Travel travel) {
+        String name = "sion";
+        try{
+            travelService.save(name, travel);
+        }catch(Exception e) {
+            e.printStackTrace();
+            return "false";
+        }
+
+        return "write";
+    }
+
+    @GetMapping("/zzim/{userId}")
+    public void func(){
+
+    }
+
+    @GetMapping("/recommend") //전국에서 추천 많은순 여행리스트
+    public void func2(){
+
+    }
+
+    @GetMapping("recommend/more") //
+    public void func4(){
+
+    }
+
+    @GetMapping("/{travelId}") // Travel 자세한 내용
+    public void func3(){
+
+    }
+
+
 }
