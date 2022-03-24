@@ -3,6 +3,7 @@ package com.example.bom.gabom.model.dto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
+//@RequiredArgsConstructor
 @NoArgsConstructor
 @Entity
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
@@ -57,7 +59,7 @@ public class Travel{
 
     //공유 여부
     @NotNull
-    private boolean isShared;
+    private Integer isShared;
     //좋아요 갯수
     @NotNull
     private Integer likedCount;
@@ -74,5 +76,25 @@ public class Travel{
     private Integer expense;
     private String content;
     private Enum transportation;
+
+
+    public Travel(Long travelId, User user, String title, Integer isShared, Integer likedCount, String state, String city) {
+        this.travelId = travelId;
+        this.user = user;
+        this.title = title;
+        this.isShared = isShared;
+        this.likedCount = likedCount;
+        this.state = state;
+        this.city = city;
+    }
+    public Travel(User user, String title, Integer isShared, Integer likedCount, String state, String city) {
+        this.user = user;
+        this.title = title;
+        this.isShared = isShared;
+        this.likedCount = likedCount;
+        this.state = state;
+        this.city = city;
+    }
+
 
 }

@@ -67,7 +67,22 @@ public class User{
     @Column(name = "liked_travel_list")
     private List<Travel> likedTravelList;
 
-    //내가 분류하여 저장한 리뷰 리스트(분류 자체로 리스트여야 하고 분류 후에도 리스트여야 해서 고민 해야함.)
+    //테스트용 임의로 생성자 만들었음. AllArgsconstructor로 하면 List도 받아서
+    public User(Long userNo, String userId, String userPw, String email, String userName, String userAuth, String appendDate, String updateDate, String profileImagePath, Integer following) {
+        this.userNo = userNo;
+        this.userId = userId;
+        this.userPw = userPw;
+        this.email = email;
+        this.userName = userName;
+        this.userAuth = userAuth;
+        this.appendDate = appendDate;
+        this.updateDate = updateDate;
+        this.profileImagePath = profileImagePath;
+        this.following = following;
+    }
+
+
+//내가 분류하여 저장한 리뷰 리스트(분류 자체로 리스트여야 하고 분류 후에도 리스트여야 해서 고민 해야함.)
     /*
     @OneToMany
     @JoinColumn(name = "stored_travel_id")
