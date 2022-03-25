@@ -1,19 +1,16 @@
 package com.example.bom.gabom.model.vo;
 
-import com.example.bom.gabom.model.dto.Travel;
+import com.example.bom.gabom.model.entity.Travel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import java.util.List;
 
 @AllArgsConstructor
 @Getter
 @Setter
-public class UserDto {
+public class UserVo {
 
     private Long userNo;
     private String userId;
