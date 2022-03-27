@@ -1,16 +1,20 @@
-package com.example.bom.gabom.model.vo;
+package com.example.bom.gabom.model.dto;
 
 import com.example.bom.gabom.model.entity.Travel;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Column;
 import java.util.List;
 
 @AllArgsConstructor
-@Getter
-@Setter
-public class UserVo {
+@Data
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class UserDto {
 
     private Long userNo;
     private String userId;

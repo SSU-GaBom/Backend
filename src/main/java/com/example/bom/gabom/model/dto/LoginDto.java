@@ -1,11 +1,11 @@
-package com.example.bom.gabom.model.vo;
+package com.example.bom.gabom.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class LoginVo {
+public class LoginDto {
     private String loginId;
     private String loginPw;
 }

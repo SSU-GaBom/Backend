@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.dto;
+package com.example.bom.gabom.model.entity;
 
 import org.junit.jupiter.api.Test;
 

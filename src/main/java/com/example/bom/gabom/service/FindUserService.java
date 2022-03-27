@@ -1,14 +1,24 @@
 package com.example.bom.gabom.service;
 
+import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.model.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
+
 @Service
-public class FindIdService {
+@RequiredArgsConstructor
+public class FindUserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final MailAuthService mailAuthService;
 
-    public
+    public User findId(String email, String name, HttpSession session){
+        User user = userRepository.findByEmailAndUserName(email, name);
+
+        mailAuthService.mailAuth(user, email, name, 2,session);
+
+        return user;
+    }
 }

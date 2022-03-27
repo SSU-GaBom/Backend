@@ -1,9 +1,8 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.dto.User;
-import com.example.bom.gabom.model.vo.UserDto;
+import com.example.bom.gabom.model.dto.UserDto;
 import com.example.bom.gabom.service.SignUpService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,12 +15,12 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/signup")
+@RequiredArgsConstructor
 public class SignUpController {
 
     boolean isChecked = false;
 
-    @Autowired
-    SignUpService signUpService;
+    private final SignUpService signUpService;
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
     @PostMapping("/checkid")

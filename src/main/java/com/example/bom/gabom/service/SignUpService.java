@@ -1,7 +1,7 @@
 package com.example.bom.gabom.service;
 
-import com.example.bom.gabom.model.dto.User;
-import com.example.bom.gabom.model.vo.UserDto;
+import com.example.bom.gabom.model.entity.User;
+import com.example.bom.gabom.model.dto.UserDto;
 import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class SignUpService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:sss");
     Date time = new Date();

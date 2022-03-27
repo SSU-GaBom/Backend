@@ -1,6 +1,6 @@
-package com.example.bom.gabom.model.dto;
+package com.example.bom.gabom.model.entity;
 
-import com.example.bom.gabom.model.vo.UserVo;
+import com.example.bom.gabom.model.dto.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -76,17 +76,17 @@ public class User{
     private List<StoredTravel> storedTravelList;
      */
 
-    public void setUserField(UserVo userVo){
-        this.userId = userVo.getUserId();
-        this.userPw = userVo.getUserPw();
-        this.email = userVo.getEmail();
-        this.userName = userVo.getUserName();
-        this.userAuth = userVo.getUserAuth();
-        this.appendDate = userVo.getAppendDate();
-        this.updateDate = userVo.getUpdateDate();
-        this.profileImagePath = userVo.getProfileImagePath();
-        this.following = userVo.getFollowing();
-        this.myTravelList = userVo.getMyTravelList();
-        this.likedTravelList = userVo.getLikedTravelList();
+    public void setUserField(UserDto userDto){
+        this.userId = userDto.getUserId();
+        this.userPw = userDto.getUserPw();
+        this.email = userDto.getEmail();
+        this.userName = userDto.getUserName();
+        this.userAuth = userDto.getUserAuth();
+        this.appendDate = userDto.getAppendDate();
+        this.updateDate = userDto.getUpdateDate();
+        this.profileImagePath = userDto.getProfileImagePath();
+        this.following = userDto.getFollowing();
+        this.myTravelList = userDto.getMyTravelList();
+        this.likedTravelList = userDto.getLikedTravelList();
     }
 }

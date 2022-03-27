@@ -1,6 +1,6 @@
 package com.example.bom.gabom.service;
 
-import com.example.bom.gabom.model.dto.User;
+import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,7 @@ import java.lang.reflect.Type;
 @RequiredArgsConstructor
 public class SignInService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public User signIn(String id, String passwd){
