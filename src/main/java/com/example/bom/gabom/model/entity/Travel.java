@@ -20,7 +20,7 @@ import java.util.List;
 public class Travel{
 
     @Id
-    @NotNull
+//    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "travel_id")
     //카드 아이디는 "UserID" + "인덱스 번호"로 하면 될 듯?
@@ -77,15 +77,6 @@ public class Travel{
     private Enum transportation;
 
 
-    public Travel(Long travelId, User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
-        this.travelId = travelId;
-        this.user = user;
-        this.title = title;
-        this.isShared = isShared;
-        this.likedCount = likedCount;
-        this.state = state;
-        this.city = city;
-    }
     public Travel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
         this.user = user;
         this.title = title;
@@ -94,6 +85,7 @@ public class Travel{
         this.state = state;
         this.city = city;
     }
+    //user에 안들어가지는것같음.
 
 
 }

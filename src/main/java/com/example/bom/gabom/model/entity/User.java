@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.List;
 public class User{
 
     @Id
-    @NotNull
+//    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no")
     private Long userNo;
@@ -59,17 +60,17 @@ public class User{
     //내가 쓴 리뷰 리스트
     @OneToMany(mappedBy = "user")
     @Column(name = "my_travel_list")
-    private List<Travel> myTravelList;
+    private List<Travel> myTravelList=new ArrayList<>();
+//    = new ArrayList<>();
 
     //찜을 누른 리뷰 리스트
     @OneToMany
     @JoinColumn(name = "travel_id")
     @Column(name = "liked_travel_list")
-    private List<Travel> likedTravelList;
+    private List<Travel> likedTravelList=new ArrayList<>();
 
-    //테스트용 임의로 생성자 만들었음. AllArgsconstructor로 하면 List도 받아서
-    public User(Long userNo, String userId, String userPw, String email, String userName, String userAuth, String appendDate, String updateDate, String profileImagePath, Integer following) {
-        this.userNo = userNo;
+    //테스트용 임의로 생성자 만들었음.
+    public User(String userId, String userPw, String email, String userName, String userAuth, String appendDate, String updateDate, String profileImagePath, Integer following) {
         this.userId = userId;
         this.userPw = userPw;
         this.email = email;

@@ -16,7 +16,7 @@ public class TravelController {
 
     @PostMapping("")
     public String writeTravel(@RequestBody Travel travel) {
-        String name = "sion";
+        String name = "사사사"; //name이 중복되거나 없으면 안되네
         try{
             travelService.save(name, travel);
         }catch(Exception e) {
@@ -26,6 +26,19 @@ public class TravelController {
 
         return "write";
     }
+
+    @GetMapping("/{travelId}") // Travel 자세한 내용
+    public Travel Travel_info(@PathVariable String travelId){ //string으로 들어오나?
+        Long id = Long.parseLong(travelId);
+        try{
+            return travelService.travel_info(id);
+        }catch (Exception e){
+            e.printStackTrace();
+            System.out.println("error<123> = " + e);
+            return null;
+        }
+    }
+
 
     @GetMapping("/zzim/{userId}")
     public void func(){
@@ -42,10 +55,7 @@ public class TravelController {
 
     }
 
-    @GetMapping("/{travelId}") // Travel 자세한 내용
-    public void func3(){
 
-    }
 
 
 }
