@@ -7,10 +7,7 @@ import com.example.bom.gabom.service.FindUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -38,7 +35,7 @@ public class FindUserController {
     //public ResponseEntity emailAuth
 
     @PostMapping("/findpw")
-    public ResponseEntity findPw(@RequestBody FindUserDto findUserDto, HttpSession seesion){
+    public ResponseEntity findPw(@RequestBody FindUserDto findUserDto, HttpSession session){
         User user;
 
         try{
@@ -49,5 +46,16 @@ public class FindUserController {
 
 
         return new ResponseEntity("userFind", HttpStatus.OK);
+    }
+
+    @PostMapping("/comparisonid")
+    public boolean comparisonId(@RequestParam String randomnum, HttpSession session){
+        if(findUserService.comparison(randomnum, session))
+            return user;
+    }
+
+    @PostMapping("/comparisonpw")
+    public boolean comparisonPw(){
+
     }
 }

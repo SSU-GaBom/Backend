@@ -6,18 +6,21 @@ import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 @Service
 @RequiredArgsConstructor
 public class FindUserService {
 
-    private final int FIND_ID = 1;
-    private final int FIND_PW = 2;
+    private final Integer FIND_ID = 1;
+    private final Integer FIND_PW = 2;
 
     private final UserRepository userRepository;
     private final MailAuthService mailAuthService;
 
+    @Transactional
     public User findId(FindUserDto findUserDto, HttpSession session){
         String[] info = new String[]{findUserDto.getEmail(), findUserDto.getUserName()};
 
@@ -29,6 +32,7 @@ public class FindUserService {
         return user;
     }
 
+    @Transactional
     public User findPw(FindUserDto findUserDto, HttpSession session){
         String[] info = new String[]{findUserDto.getEmail(), findUserDto.getUserName(), findUserDto.getUserId()};
 
@@ -38,4 +42,12 @@ public class FindUserService {
 
         return user;
     }
+
+    @Transactional
+    public boolean comparison(String randomnum, HttpSession session){
+        String sessrandnum = session.getAttribute()
+    }
+
+    @Transactional
+    public boolean
 }
