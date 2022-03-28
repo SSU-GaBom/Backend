@@ -16,22 +16,31 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class MailAuthService {
 
+    private final int EMAIL = 0;
+    private final int USER_NAME = 1;
+    private final int USERID = 2;
+
+
     private final JavaMailSender mailSender;
 
-    public void mailAuth(User user, String email, String name, int statusnum, HttpSession session){
+    public void mailAuth(User user, String[] info, int statusnum, HttpSession session){
         int randomnum = 0;
 
+        //인덱스에 따라 용도가 달라짐
         String[] status = {"계정 생성", "아이디 찾기", "비밀번호 찾기(변경)" };
 
         if(user != null){
+            //6자리 랜덤 숫자
             Random r = new Random();
             randomnum = r.nextInt(1000000);
 
-            if(user.getUserName().equals(name)){
+            //원하는 유저랑 같으면 됨.
+            if(user.getUserName().equals(info[USER_NAME])){
                 session.setAttribute(user.getEmail(), randomnum);
 
+                //
                 String setfrom = "springgabom@gmail.com";
-                String tomail = email;
+                String tomail = info[EMAIL];
                 String title = "[가봄] 비밀번호 변경 인증 메일입니다.";
                 String content = System.getProperty("line.separator")
                         + "안녕하세요 회원님" + System.getProperty("line.separator")
