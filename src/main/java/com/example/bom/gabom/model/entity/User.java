@@ -1,8 +1,6 @@
 package com.example.bom.gabom.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -10,7 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -58,8 +57,8 @@ public class User{
     private Integer following;
 
     //내가 쓴 리뷰 리스트
-    @OneToMany(mappedBy = "user")
-    @Column(name = "my_travel_list")
+    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
+    //@Column(name = "my_travel_list")
     private List<Travel> myTravelList=new ArrayList<>();
 //    = new ArrayList<>();
 
@@ -68,6 +67,12 @@ public class User{
     @JoinColumn(name = "travel_id")
     @Column(name = "liked_travel_list")
     private List<Travel> likedTravelList=new ArrayList<>();
+
+    //연관 관계 편의 메소드
+    public void add(Travel travel){
+        this.getMyTravelList().add(travel);
+        travel.setUser(this);
+    }
 
     //테스트용 임의로 생성자 만들었음.
     public User(String userId, String userPw, String email, String userName, String userAuth, String appendDate, String updateDate, String profileImagePath, Integer following) {

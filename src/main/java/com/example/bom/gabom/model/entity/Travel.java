@@ -1,8 +1,6 @@
 package com.example.bom.gabom.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,7 +9,8 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 //@RequiredArgsConstructor
 @NoArgsConstructor
@@ -26,7 +25,7 @@ public class Travel{
     //카드 아이디는 "UserID" + "인덱스 번호"로 하면 될 듯?
     private Long travelId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no")
     private User user;
 
@@ -77,15 +76,36 @@ public class Travel{
     private Enum transportation;
 
 
-    public Travel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
-        this.user = user;
+
+    //user에 안들어가지는것같음.
+
+
+
+
+//    public Travel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
+//        this.user = user;
+//        this.title = title;
+//        this.isShared = isShared;
+//        this.likedCount = likedCount;
+//        this.state = state;
+//        this.city = city;
+//    }
+    public Travel(String title, Boolean isShared, Integer likedCount, String state, String city) {
         this.title = title;
         this.isShared = isShared;
         this.likedCount = likedCount;
         this.state = state;
         this.city = city;
     }
-    //user에 안들어가지는것같음.
 
-
+    public static Travel CreateTravel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
+        Travel travel = new Travel();
+        travel.setUser(user);
+        travel.title = title;
+        travel.isShared = isShared;
+        travel.likedCount = likedCount;
+        travel.state = state;
+        travel.city = city;
+        return travel;
+    }
 }
