@@ -21,7 +21,7 @@ public class SignInController {
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
     @PostMapping("/signin")
-    public ResponseEntity signIn(@RequestBody LoginDto loginDto, HttpServletRequest httpServletRequest, BindingResult bindingResult){
+    public ResponseEntity signIn(@RequestBody LoginDto loginDto, HttpSession session, BindingResult bindingResult){
         User user = null;
 
         if(bindingResult.hasErrors())
@@ -37,8 +37,7 @@ public class SignInController {
 
             //user가 null이 아닌 id가 있는 경우에만 세션 등록
             if (user != null){
-                HttpSession httpSession = httpServletRequest.getSession();
-                httpSession.setAttribute(SessionConstraints.Login_User, user);
+                session.setAttribute(SessionConstraints.Login_User, user);
             }
         }catch(Exception e){
             e.printStackTrace();

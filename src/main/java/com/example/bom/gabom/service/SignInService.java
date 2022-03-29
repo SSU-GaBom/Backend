@@ -22,7 +22,6 @@ public class SignInService {
         User user = null;
 
         if(passwordEncoder.matches(userRepository.findByUserId(id).getUserPw(), passwd)){
-            System.out.println("반환됐어용.");
             user = userRepository.findByUserId(id);
         }
         return user;

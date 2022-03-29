@@ -6,7 +6,6 @@ import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
@@ -14,40 +13,23 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 public class FindUserService {
 
-    private final Integer FIND_ID = 1;
-    private final Integer FIND_PW = 2;
-
     private final UserRepository userRepository;
-    private final MailAuthService mailAuthService;
+    private final AuthMailService authMailService;
 
+    //return true면 유저가 존재해서 정상적으로 메일이 보내진거 false면 유저가 없거나 메일이 보내지지 않은 것
     @Transactional
-    public User findId(FindUserDto findUserDto, HttpSession session){
-        String[] info = new String[]{findUserDto.getEmail(), findUserDto.getUserName()};
-
-        User user = userRepository.findByEmailAndUserName(info[0], info[1]);
-
-        mailAuthService.mailAuth(user, info, FIND_ID, session);
-
+    public Boolean findInfo(FindUserDto findUserDto, Integer statusnum, HttpSession session){
         //여기는 난수 생성 후 비교까지는 하지 않은 단계임. 이후에 난수랑 비교해서 같으면 그 때 아이디를 넘겨줘야함.
-        return user;
+        return authMailService.authMail(findUserDto, statusnum, session);
     }
 
+    //
     @Transactional
-    public User findPw(FindUserDto findUserDto, HttpSession session){
-        String[] info = new String[]{findUserDto.getEmail(), findUserDto.getUserName(), findUserDto.getUserId()};
+    public User comparison(String email, String randomnum, HttpSession session){
+        Object sessrandnum = session.getAttribute(email);
 
-        User user = userRepository.findByEmailAndUserNameAndUserId(info[0], info[1], info[2]);
-
-        mailAuthService.mailAuth(user, info, FIND_PW, session);
-
-        return user;
+        if(sessrandnum.equals(randomnum))
+            return userRepository.findByEmail(email);
+        return
     }
-
-    @Transactional
-    public boolean comparison(String randomnum, HttpSession session){
-        String sessrandnum = session.getAttribute()
-    }
-
-    @Transactional
-    public boolean
 }

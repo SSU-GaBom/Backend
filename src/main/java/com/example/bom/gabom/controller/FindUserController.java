@@ -16,46 +16,41 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class FindUserController {
 
+    private final Integer FIND_ID = 1;
+    private final Integer FIND_PW = 2;
+
     private final FindUserService findUserService;
 
     //이메일 난수 인증 페이지 새로 만들어야 함.
     @PostMapping("/findid")
-    public ResponseEntity findId(@RequestBody FindUserDto finduserDto, HttpSession session){
-        User user;
-
-        try {
-            user = findUserService.findId(finduserDto, session);
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
-
-        return new ResponseEntity("userFind", HttpStatus.OK);
+    public Boolean findId(@RequestBody FindUserDto finduserDto, HttpSession session){
+        return findUserService.findInfo(finduserDto, FIND_ID, session);
     }
 
     //public ResponseEntity emailAuth
 
     @PostMapping("/findpw")
-    public ResponseEntity findPw(@RequestBody FindUserDto findUserDto, HttpSession session){
-        User user;
-
-        try{
-            user = findUserService.findPw(findUserDto, session);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
-        return new ResponseEntity("userFind", HttpStatus.OK);
+    public Boolean findPw(@RequestBody FindUserDto findUserDto, HttpSession session){
+        return findUserService.findInfo(findUserDto, FIND_PW, session);
     }
 
     @PostMapping("/comparisonid")
-    public boolean comparisonId(@RequestParam String randomnum, HttpSession session){
-        if(findUserService.comparison(randomnum, session))
-            return user;
+    public String comparisonId(@RequestParam String email,
+                             @RequestParam String randomnum,
+                             HttpSession session){
+        try {
+            return findUserService.comparison(email, randomnum, session).getUserId();
+        }catch(Exception e){
+            return "에러여~";
+        }
     }
 
     @PostMapping("/comparisonpw")
-    public boolean comparisonPw(){
+    public ResponseEntity comparisonPw(@RequestParam String email,
+                                       @RequestParam String randomnum,
+                                       HttpSession session){
+        findUserService.comparison(email, randomnum, session);
+        return
 
     }
 }

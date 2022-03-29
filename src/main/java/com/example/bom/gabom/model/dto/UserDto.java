@@ -29,8 +29,6 @@ public class UserDto {
     private List<Travel> myTravelList;
     private List<Travel> likedTravelList;
 
-
-
     //내가 분류하여 저장한 리뷰 리스트(분류 자체로 리스트여야 하고 분류 후에도 리스트여야 해서 고민 해야함.)
     /*
     @OneToMany

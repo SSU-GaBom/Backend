@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(indexes = @Index(name="email", columnList="email", unique = true))
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User{
 
