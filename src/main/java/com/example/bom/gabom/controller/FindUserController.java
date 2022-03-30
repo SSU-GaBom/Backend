@@ -50,7 +50,24 @@ public class FindUserController {
             return "에러여~";
         }
     }
-/*
+
+    //비밀번호와 비밀번호 확인 부분은 막아두다가 여기서 true 되면 활성화
+    @PostMapping("/authpw")
+    public Boolean authPw(@RequestParam String email,
+                          @RequestParam String randomnum,
+                          HttpSession session) {
+        try {
+            User user = findUserService.comparison(email, randomnum, session);
+            if (user == null)
+                return false;
+            else {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @PostMapping("/changepw")
     public String changePw(@RequestParam String email,
                            @RequestParam String randomnum,
@@ -71,19 +88,5 @@ public class FindUserController {
         return;
     }
 
-    @PostMapping("/authpw")
-    public Boolean authPw(@RequestParam String email,
-                          @RequestParam String randomnum,
-                          HttpSession session) {
-        try {
-            User user = findUserService.comparison(email, randomnum, session);
-            if (user == null)
-                return false;
-            else {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
+
 }
