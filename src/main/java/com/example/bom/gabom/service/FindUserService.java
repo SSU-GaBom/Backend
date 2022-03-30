@@ -23,13 +23,12 @@ public class FindUserService {
         return authMailService.authMail(findUserDto, statusnum, session);
     }
 
-    //
     @Transactional
     public User comparison(String email, String randomnum, HttpSession session){
-        Object sessrandnum = session.getAttribute(email);
+        String sessrandnum = (String)session.getAttribute(email);
 
         if(sessrandnum.equals(randomnum))
             return userRepository.findByEmail(email);
-        return
+        return null;
     }
 }

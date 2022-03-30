@@ -21,36 +21,69 @@ public class FindUserController {
 
     private final FindUserService findUserService;
 
-    //이메일 난수 인증 페이지 새로 만들어야 함.
-    @PostMapping("/findid")
-    public Boolean findId(@RequestBody FindUserDto finduserDto, HttpSession session){
+    //이메일과 이름을 넘기면 난수를 생성하고 정상적으로 생성 됐는지 true false로 결과 값 출력
+    @PostMapping("/idexist")
+    public Boolean isUserIdExist(@RequestBody FindUserDto finduserDto, HttpSession session) {
         return findUserService.findInfo(finduserDto, FIND_ID, session);
     }
 
-    //public ResponseEntity emailAuth
-
-    @PostMapping("/findpw")
-    public Boolean findPw(@RequestBody FindUserDto findUserDto, HttpSession session){
+    //이메일과 아이디를 넘기면 난수를 생성하고 정상적으로 생성 됐는지 true false로 결과 값 출력
+    @PostMapping("/pwexist")
+    public Boolean isUserPwExist(@RequestBody FindUserDto findUserDto, HttpSession session) {
         return findUserService.findInfo(findUserDto, FIND_PW, session);
     }
 
-    @PostMapping("/comparisonid")
-    public String comparisonId(@RequestParam String email,
-                             @RequestParam String randomnum,
-                             HttpSession session){
+    //여기는 requestparam으로 post 받아야함.
+    @PostMapping("/showid")
+    public String showId(@RequestParam("email") String email,
+                         @RequestParam("randomnum") String randomnum,
+                         HttpSession session) {
+
         try {
-            return findUserService.comparison(email, randomnum, session).getUserId();
-        }catch(Exception e){
+            User user = findUserService.comparison(email, randomnum, session);
+            if (user == null)
+                return "값이 다릅니다..";
+            else
+                return user.getUserId();
+        } catch (Exception e) {
+            e.printStackTrace();
             return "에러여~";
         }
     }
+/*
+    @PostMapping("/changepw")
+    public String changePw(@RequestParam String email,
+                           @RequestParam String randomnum,
+                           @RequestParam String passwd,
+                           @RequestParam String checkpasswd) {
 
-    @PostMapping("/comparisonpw")
-    public ResponseEntity comparisonPw(@RequestParam String email,
-                                       @RequestParam String randomnum,
-                                       HttpSession session){
-        findUserService.comparison(email, randomnum, session);
-        return
+        try {
+            User user = findUserService.comparison(email, randomnum, session);
+            if (user == null)
+                return "난수의 값이 다릅니다.";
+            else {
 
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return;
     }
+
+    @PostMapping("/authpw")
+    public Boolean authPw(@RequestParam String email,
+                          @RequestParam String randomnum,
+                          HttpSession session) {
+        try {
+            User user = findUserService.comparison(email, randomnum, session);
+            if (user == null)
+                return false;
+            else {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 }

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(indexes = @Index(name="email", columnList="email", unique = true))
+@Table(indexes = @Index(name="email", columnList="user_id, email", unique = true))
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class User{
 
@@ -27,6 +27,7 @@ public class User{
 
     //유저가 사용할 아이디
     @NotNull
+    @Column(name = "user_id")
     private String userId;
     //비밀번호
     @NotNull
