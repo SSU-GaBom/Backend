@@ -20,6 +20,7 @@ public class SignInController {
     SignInService signInService;
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
+    //User or String return
     @PostMapping("/signin")
     public ResponseEntity signIn(@RequestBody LoginDto loginDto, HttpSession session, BindingResult bindingResult){
         User user = null;
@@ -27,18 +28,9 @@ public class SignInController {
         if(bindingResult.hasErrors())
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 
-        //입력받은 아이디와 비밀번호
-        String loginid = loginDto.getLoginId();
-        String passwd = loginDto.getLoginPw();
-
         try {
             //디비에서 검색하여 존재하면 user객체에 주입
-            user = signInService.signIn(loginid, passwd);
-
-            //user가 null이 아닌 id가 있는 경우에만 세션 등록
-            if (user != null){
-                session.setAttribute(SessionConstraints.Login_User, user);
-            }
+            user = signInService.signIn(loginDto, session);
         }catch(Exception e){
             e.printStackTrace();
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);

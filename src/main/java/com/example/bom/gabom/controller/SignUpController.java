@@ -22,31 +22,32 @@ public class SignUpController {
 
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
+    //checkparam인 경우에는 직접 key:value로 해줘야 json 파싱이 가능함.
     @PostMapping("/checkid")
-    public Boolean checkId(@RequestParam String userId) {
+    public ResponseEntity checkId(@RequestParam HashMap<String, String> userId) {
         //false일 경우 계정이 있는 것 -> 계정 생성 불가
-        return signUpService.checkId(userId);
+        return new ResponseEntity(signUpService.checkId(userId.get("userId")), HttpStatus.OK);
     }
 
     //이메일이 존재하는지 체크하는 버튼을 먼저 클릭해서 확인한 후 인증 이메일을 통해서 authemail메소드를 통해서 이메일 인증을 진행.
     @PostMapping("/checkemail")
-    public Boolean checkEmail(@RequestParam String email) {
+    public ResponseEntity checkEmail(@RequestParam HashMap<String, String> email) {
         //false일 경우 이메일이 있는 것 -> 계정 생성 불가
-        return signUpService.checkEmail(email);
+        return new ResponseEntity(signUpService.checkEmail(email.get("email")), HttpStatus.OK);
     }
 
     //이건 이메일 인증을 위해서 이메일을 보내는 컨트롤러
     @PostMapping("/sendemail")
-    public Boolean sendEmail(@RequestParam String email, HttpSession session) {
-        return signUpService.sendEmail(email, session);
+    public ResponseEntity sendEmail(@RequestParam HashMap<String, String> email, HttpSession session) {
+        return new ResponseEntity(signUpService.sendEmail(email.get("email"), session), HttpStatus.OK);
     }
 
     //이건 이메일로 보내진 난수를 체크하는 컨트롤러
     @PostMapping("/authemail")
-    public Boolean authEmail(@RequestParam String randnum,
-                             @RequestParam String email,
-                             HttpSession session) {
-        return signUpService.authMail(randnum, email, session);
+    public ResponseEntity authEmail(@RequestParam HashMap<String, String> randNum,
+                                    @RequestParam HashMap<String, String> email,
+                                    HttpSession session) {
+        return new ResponseEntity(signUpService.authMail(randNum.get("randnum"), email.get("email"), session), HttpStatus.OK);
     }
 
     @PostMapping("/register")

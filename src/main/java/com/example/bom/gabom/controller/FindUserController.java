@@ -1,12 +1,14 @@
 package com.example.bom.gabom.controller;
 
 import com.example.bom.gabom.model.dto.FindUserDto;
+import com.example.bom.gabom.model.dto.UserAuthDto;
 import com.example.bom.gabom.model.dto.UserDto;
 import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.service.FindUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -21,72 +23,58 @@ public class FindUserController {
 
     private final FindUserService findUserService;
 
-    //이메일과 이름을 넘기면 난수를 생성하고 정상적으로 생성 됐는지 true false로 결과 값 출력
+    //이메일과 이름을 넘기면 난수를 생성하고 이메일칸, 이름 칸은 비활성한다. 그리고 인증번호를 치는 창이 활성화 된다. 정상적으로 생성 됐는지 true false로 결과 값 출력
+    //boolean type return임.
     @PostMapping("/idexist")
-    public Boolean isUserIdExist(@RequestBody FindUserDto finduserDto, HttpSession session) {
-        return findUserService.findInfo(finduserDto, FIND_ID, session);
+    public ResponseEntity isUserIdExist(@RequestBody FindUserDto finduserDto, HttpSession session) {
+        return new ResponseEntity(findUserService.findInfo(finduserDto, FIND_ID, session), HttpStatus.OK);
     }
 
-    //이메일과 아이디를 넘기면 난수를 생성하고 정상적으로 생성 됐는지 true false로 결과 값 출력
+    //이메일과 아이디를 넘기면 난수를 생성하고 이메일칸, 아이디 칸은 비활성한다. 그리고 인증번호 치는 창이 활성화 된다. 정상적으로 생성 됐는지 true false로 결과 값 출력
+    //boolean type return 임.
     @PostMapping("/pwexist")
-    public Boolean isUserPwExist(@RequestBody FindUserDto findUserDto, HttpSession session) {
-        return findUserService.findInfo(findUserDto, FIND_PW, session);
+    public ResponseEntity isUserPwExist(@RequestBody FindUserDto findUserDto, HttpSession session) {
+        return new ResponseEntity(findUserService.findInfo(findUserDto, FIND_PW, session), HttpStatus.OK);
     }
 
     //여기는 requestparam으로 post 받아야함.
+    //String type return
     @PostMapping("/showid")
-    public String showId(@RequestParam("email") String email,
-                         @RequestParam("randomnum") String randomnum,
+    public ResponseEntity showId(@RequestBody UserAuthDto userAuthDto,
                          HttpSession session) {
 
         try {
-            User user = findUserService.comparison(email, randomnum, session);
+            User user = findUserService.comparison(userAuthDto.getEmail(), userAuthDto.getRandNum(), session);
             if (user == null)
-                return "값이 다릅니다..";
+                return new ResponseEntity("값이 다릅니다..", HttpStatus.OK);
             else
-                return user.getUserId();
+                return new ResponseEntity(user.getUserId(), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            return "에러여~";
+            return new ResponseEntity("에러여~", HttpStatus.OK);
         }
     }
 
     //비밀번호와 비밀번호 확인 부분은 막아두다가 여기서 true 되면 활성화
     @PostMapping("/authpw")
-    public Boolean authPw(@RequestParam String email,
-                          @RequestParam String randomnum,
+    public ResponseEntity authPw(@RequestBody UserAuthDto userAuthDto,
                           HttpSession session) {
         try {
-            User user = findUserService.comparison(email, randomnum, session);
+            User user = findUserService.comparison(userAuthDto.getEmail(), userAuthDto.getRandNum(), session);
             if (user == null)
-                return false;
+                return new ResponseEntity(false, HttpStatus.OK);
             else {
-                return true;
+                return new ResponseEntity(true, HttpStatus.OK);
             }
         } catch (Exception e) {
             e.printStackTrace();
+            return new ResponseEntity(false, HttpStatus.OK);
         }
     }
 
+    //프론트에서 확인 비밀번호와 그냥 비밀번호가 같다면 이메일과 함께
     @PostMapping("/changepw")
-    public String changePw(@RequestParam String email,
-                           @RequestParam String randomnum,
-                           @RequestParam String passwd,
-                           @RequestParam String checkpasswd) {
-
-        try {
-            User user = findUserService.comparison(email, randomnum, session);
-            if (user == null)
-                return "난수의 값이 다릅니다.";
-            else {
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return;
+    public ResponseEntity changePw(@RequestBody UserAuthDto userAuthDto) {
+        return new ResponseEntity(findUserService.setPassword(userAuthDto), HttpStatus.OK);
     }
-
-
 }

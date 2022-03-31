@@ -1,9 +1,11 @@
 package com.example.bom.gabom.service;
 
 import com.example.bom.gabom.model.dto.FindUserDto;
+import com.example.bom.gabom.model.dto.UserAuthDto;
 import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -23,12 +25,29 @@ public class FindUserService {
         return authMailService.authMail(findUserDto, statusnum, session);
     }
 
+    //난수를 비교한다. 비교하여 이메일로 유저를 찾아낸다.
     @Transactional
-    public User comparison(String email, String randomnum, HttpSession session){
+    public User comparison(String email, String randnum, HttpSession session){
         String sessrandnum = (String)session.getAttribute(email);
 
-        if(sessrandnum.equals(randomnum))
+        if(sessrandnum.equals(randnum))
             return userRepository.findByEmail(email);
         return null;
+    }
+
+    //넘겨 받은 객체로 이메일을 통해 유저 정보를 얻어서 비밀번호를 업데이트한다.
+    @Transactional
+    public boolean setPassword(UserAuthDto userAuthDto){
+        User user;
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        user = userRepository.findByEmail(userAuthDto.getEmail());
+
+        userRepository.updatePassWord(encoder.encode(userAuthDto.getPasswd()), user.getUserNo());
+
+        if(encoder.matches(userAuthDto.getPasswd(), user.getUserPw()))
+            return true;
+
+        return false;
     }
 }

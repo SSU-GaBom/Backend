@@ -45,11 +45,11 @@ public class SignUpService {
     public Boolean sendEmail(String email, HttpSession session) {
         boolean sendable = true;
         Random r = new Random();
-        Integer randomnum = r.nextInt(1000000);
+        Integer randnum = r.nextInt(1000000);
         Integer statusnum = 0;
 
-        session.setAttribute(email, randomnum.toString());
-        return authMailService.sendMail(sendable, email, statusnum, randomnum);
+        session.setAttribute(email, randnum.toString());
+        return authMailService.sendMail(sendable, email, statusnum, randnum);
     }
 
     //
