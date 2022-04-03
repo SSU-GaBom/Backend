@@ -17,7 +17,7 @@ import java.util.List;
 public class User{
 
     @Id
-//    @NotNull
+//    //@NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_no")
     private Long userNo;
@@ -25,7 +25,7 @@ public class User{
     //유저가 사용할 아이디
     @NotNull
     private String userId;
-    //비밀번호
+//    비밀번호
     @NotNull
     private String userPw;
     //이메일
@@ -56,22 +56,22 @@ public class User{
     @NotNull
     private Integer following;
 
-    //내가 쓴 리뷰 리스트
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
-    //@Column(name = "my_travel_list")
+//    내가 쓴 리뷰 리스트
+    @OneToMany(mappedBy = "user")
+//            , cascade = CascadeType.ALL)
+    @Column(name = "my_travel_list")
     private List<Travel> myTravelList=new ArrayList<>();
-//    = new ArrayList<>();
 
-    //찜을 누른 리뷰 리스트
-    @OneToMany
-    @JoinColumn(name = "travel_id")
-    @Column(name = "liked_travel_list")
-    private List<Travel> likedTravelList=new ArrayList<>();
+//    찜을 누른 리뷰 리스트
+//    @OneToMany
+//    @JoinColumn(name = "travel_id")
+//    @Column(name = "liked_travel_list")
+//    private List<Travel> likedTravelList=new ArrayList<>();
 
-    //연관 관계 편의 메소드
+//    연관 관계 편의 메소드
     public void add(Travel travel){
-        this.getMyTravelList().add(travel);
         travel.setUser(this);
+        this.myTravelList.add(travel);
     }
 
     //테스트용 임의로 생성자 만들었음.

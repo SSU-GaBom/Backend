@@ -33,4 +33,8 @@ public class Card{
     @Column(name = "image_path")
     private String imagePath;
 
+    public Card(String content, String imagePath) {
+        this.content = content;
+        this.imagePath = imagePath;
+    }
 }

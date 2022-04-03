@@ -7,13 +7,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 //@RequiredArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Travel{
@@ -25,13 +27,16 @@ public class Travel{
     //카드 아이디는 "UserID" + "인덱스 번호"로 하면 될 듯?
     private Long travelId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
+//            (fetch = FetchType.LAZY)
+//    @JoinColumn(name = "user_no")
     @JoinColumn(name = "user_no")
     private User user;
 
-    //리뷰 내부의 핀 리스트
+//    리뷰 내부의 핀 리스트
     @OneToMany(mappedBy = "travel")
-    private List<Pin> pinList;
+    @Column(name = "pin_list")
+    private List<Pin> pinList=new ArrayList<>();
 
     //리뷰 제목
     @NotNull
@@ -55,7 +60,7 @@ public class Travel{
     @Column(name = "end_date")
     private LocalDateTime endDate;
 
-    //공유 여부
+//    공유 여부
     @NotNull
     private Boolean isShared;
     //좋아요 갯수
@@ -79,17 +84,21 @@ public class Travel{
 
     //user에 안들어가지는것같음.
 
+    //    연관 관계 편의 메소드
+    public void add(Pin pin){
+        pin.setTravel(this);
+        this.pinList.add(pin);
+    }
 
 
-
-//    public Travel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
-//        this.user = user;
-//        this.title = title;
-//        this.isShared = isShared;
-//        this.likedCount = likedCount;
-//        this.state = state;
-//        this.city = city;
-//    }
+    public Travel(User user, String title, Boolean isShared, Integer likedCount, String state, String city) {
+        this.user = user;
+        this.title = title;
+        this.isShared = isShared;
+        this.likedCount = likedCount;
+        this.state = state;
+        this.city = city;
+    }
     public Travel(String title, Boolean isShared, Integer likedCount, String state, String city) {
         this.title = title;
         this.isShared = isShared;

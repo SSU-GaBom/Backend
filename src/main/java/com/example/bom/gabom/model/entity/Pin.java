@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -32,6 +33,11 @@ public class Pin{
 
     //양방향 1대다
     @OneToMany(mappedBy = "pin")
-    private List<Card> cardList;
+    private List<Card> cardList=new ArrayList<>();
+
+    public void add(Card card){
+        card.setPin(this);
+        this.cardList.add(card);
+    }
 
 }

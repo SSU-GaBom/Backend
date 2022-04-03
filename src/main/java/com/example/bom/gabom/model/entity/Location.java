@@ -15,10 +15,10 @@ import javax.validation.constraints.NotNull;
 public class Location{
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "location_id")
     private Long locationId;
+
 
     //도로명 주소 or 지번 주소
     @NotNull
