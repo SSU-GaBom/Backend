@@ -43,9 +43,9 @@ public class FindUserService {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         user = userRepository.findByEmail(userAuthDto.getEmail());
 
-        userRepository.updatePassWord(encoder.encode(userAuthDto.getPasswd()), user.getUserNo());
+        userRepository.updatePassWord(encoder.encode(userAuthDto.getPassword()), user.getUserNo());
 
-        if(encoder.matches(userAuthDto.getPasswd(), user.getUserPw()))
+        if(encoder.matches(userAuthDto.getPassword(), user.getUserPw()))
             return true;
 
         return false;

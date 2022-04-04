@@ -67,10 +67,10 @@ public class AuthMailService {
             Boolean sendable = false;
 
             if (statusNum == 1) {
-                session.setAttribute(user.getEmail(), randNum.toString());
+                session.setAttribute(user.getEmail(), Long.toString(randNum));
                 sendable = user.getUserName().equals(info[statusNum]);
             } else if (statusNum == 2) {
-                session.setAttribute(user.getEmail(), randNum.toString());
+                session.setAttribute(user.getEmail(), Long.toString(randNum));
                 sendable = user.getUserId().equals(info[statusNum]);
 
             }

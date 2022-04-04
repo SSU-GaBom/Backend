@@ -2,6 +2,9 @@ package com.example.bom.gabom.controller;
 
 import com.example.bom.gabom.model.dto.UserDto;
 import com.example.bom.gabom.service.SignUpService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/signup")
+@Api(tags = "회원가입 컨트롤러입니다.")
 @RequiredArgsConstructor
 public class SignUpController {
 
@@ -23,6 +27,8 @@ public class SignUpController {
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
     //checkparam인 경우에는 직접 key:value로 해줘야 json 파싱이 가능함.
+    @ApiResponse(code = 500, message = "아이디가 중복일 때")
+    @ApiOperation(value = "아이디의 중복 여부를 확인하는 메소드")
     @PostMapping("/checkid")
     public ResponseEntity checkId(@RequestParam HashMap<String, String> userId) {
         //false일 경우 계정이 있는 것 -> 계정 생성 불가

@@ -9,5 +9,4 @@ public class GaBomApplication {
     public static void main(String[] args) {
         SpringApplication.run(GaBomApplication.class, args);
     }
-
 }
