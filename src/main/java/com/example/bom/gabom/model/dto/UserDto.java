@@ -3,17 +3,16 @@ package com.example.bom.gabom.model.dto;
 import com.example.bom.gabom.model.entity.Travel;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import java.util.List;
 
 @AllArgsConstructor
-@Data
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+@NoArgsConstructor
+@Getter
+@Setter
+//@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserDto {
 
     private Long userNo;

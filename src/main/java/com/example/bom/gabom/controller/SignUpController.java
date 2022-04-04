@@ -32,19 +32,20 @@ public class SignUpController {
     @PostMapping("/checkid")
     public ResponseEntity checkId(@RequestParam HashMap<String, String> userId) {
         //false일 경우 계정이 있는 것 -> 계정 생성 불가
-        return new ResponseEntity(signUpService.checkId(userId.get("userId")), HttpStatus.OK);
+        if(signUpService.checkId(userId.get("userId"))){
+            isChecked = true;
+            return new ResponseEntity(true, HttpStatus.OK);
+        }
+        isChecked = false;
+        return new ResponseEntity(false, HttpStatus.OK);
     }
 
     //이메일이 존재하는지 체크하는 버튼을 먼저 클릭해서 확인한 후 인증 이메일을 통해서 authemail메소드를 통해서 이메일 인증을 진행.
     @PostMapping("/checkemail")
-    public ResponseEntity checkEmail(@RequestParam HashMap<String, String> email) {
+    public ResponseEntity checkEmail(@RequestParam HashMap<String, String> email, HttpSession session) {
+        if(signUpService.checkEmail(email.get("email")))
+            return new ResponseEntity("이메일이 존재합니다.", HttpStatus.OK);
         //false일 경우 이메일이 있는 것 -> 계정 생성 불가
-        return new ResponseEntity(signUpService.checkEmail(email.get("email")), HttpStatus.OK);
-    }
-
-    //이건 이메일 인증을 위해서 이메일을 보내는 컨트롤러
-    @PostMapping("/sendemail")
-    public ResponseEntity sendEmail(@RequestParam HashMap<String, String> email, HttpSession session) {
         return new ResponseEntity(signUpService.sendEmail(email.get("email"), session), HttpStatus.OK);
     }
 
@@ -53,7 +54,12 @@ public class SignUpController {
     public ResponseEntity authEmail(@RequestParam HashMap<String, String> randNum,
                                     @RequestParam HashMap<String, String> email,
                                     HttpSession session) {
-        return new ResponseEntity(signUpService.authMail(randNum.get("randnum"), email.get("email"), session), HttpStatus.OK);
+        if(signUpService.authMail(randNum.get("randnum"), email.get("email"), session)){
+            isChecked = true;
+            return new ResponseEntity(true, HttpStatus.OK);
+        }
+        isChecked = false;
+        return new ResponseEntity(true, HttpStatus.OK);
     }
 
     @PostMapping("/register")
@@ -64,11 +70,11 @@ public class SignUpController {
                 signUpService.joinUser(userDto);
             } catch (Exception e) {
                 e.printStackTrace();
-                return new ResponseEntity<>("failed", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(false, HttpStatus.BAD_REQUEST);
             }
         else
-            return new ResponseEntity<>("do check id", HttpStatus.OK);
+            return new ResponseEntity<>(false, HttpStatus.OK);
 
-        return new ResponseEntity<>("success", HttpStatus.OK);
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 }

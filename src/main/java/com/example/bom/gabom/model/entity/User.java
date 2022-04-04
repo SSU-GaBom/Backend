@@ -1,6 +1,7 @@
 package com.example.bom.gabom.model.entity;
 
 import com.example.bom.gabom.model.dto.UserDto;
+import lombok.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -27,39 +29,38 @@ public class User{
     private Long userNo;
 
     //유저가 사용할 아이디
-    @NotNull
+    //@NotNull
     @Column(name = "user_id")
     private String userId;
     //비밀번호
-    @NotNull
+    //@NotNull
     private String userPw;
     //이메일
-    @NotNull
+    //@NotNull
     @Email
     private String email;
     //유저 실명
-    @NotNull
+    //@NotNull
     private String userName;
 
     //userAuth??
-    @NotNull
+    //@NotNull
     private String userAuth;
 
     //계정 추가 시각
-    @NotNull
+    //@NotNull
     private String appendDate;
 
     //계정 수정 시각
-    @NotNull
+    //@NotNull
     private String updateDate;
 
     //유저 프로필이 저장될 경로
-    @NotNull
+    //@NotNull
     @Column(name = "profile_image_path")
     private String profileImagePath;
-
     //유저를 팔로우한 사람 수
-    @NotNull
+    //@NotNull
     private Integer following;
 
     //내가 쓴 리뷰 리스트

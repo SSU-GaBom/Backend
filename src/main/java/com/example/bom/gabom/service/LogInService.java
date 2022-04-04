@@ -5,17 +5,15 @@ import com.example.bom.gabom.model.dto.LoginDto;
 import com.example.bom.gabom.model.entity.User;
 import com.example.bom.gabom.model.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
-import java.lang.reflect.Type;
 
 @Service
 @RequiredArgsConstructor
-public class SignInService {
+public class LogInService {
 
     private final UserRepository userRepository;
 
