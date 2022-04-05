@@ -1,5 +1,6 @@
 package com.example.bom.gabom.model.dto;
 
+import com.example.bom.gabom.model.entity.Image;
 import com.example.bom.gabom.model.entity.Travel;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -20,11 +21,11 @@ public class UserDto {
     private String userPw;
     private String email;
     private String userName;
-    private String userAuth;
     private String appendDate;
     private String updateDate;
-    private String profileImagePath;
+    private Image profileImage;
     private Integer following;
+    private List<String> roles;
     private List<Travel> myTravelList;
     private List<Travel> likedTravelList;
 

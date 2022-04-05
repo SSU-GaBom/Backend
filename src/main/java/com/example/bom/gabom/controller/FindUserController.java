@@ -27,14 +27,14 @@ public class FindUserController {
     //boolean type return임.
     @PostMapping("/idexist")
     public ResponseEntity isUserIdExist(@RequestBody FindUserDto finduserDto, HttpSession session) {
-        return new ResponseEntity(findUserService.findInfo(finduserDto, FIND_ID, session), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(findUserService.findInfo(finduserDto, FIND_ID, session));
     }
 
     //이메일과 아이디를 넘기면 난수를 생성하고 이메일칸, 아이디 칸은 비활성한다. 그리고 인증번호 치는 창이 활성화 된다. 정상적으로 생성 됐는지 true false로 결과 값 출력
     //boolean type return 임.
     @PostMapping("/pwexist")
     public ResponseEntity isUserPwExist(@RequestBody FindUserDto findUserDto, HttpSession session) {
-        return new ResponseEntity(findUserService.findInfo(findUserDto, FIND_PW, session), HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).body(findUserService.findInfo(findUserDto, FIND_PW, session));
     }
 
     //여기는 requestparam으로 post 받아야함.

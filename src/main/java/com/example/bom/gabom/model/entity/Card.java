@@ -1,13 +1,14 @@
 package com.example.bom.gabom.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -30,7 +31,7 @@ public class Card{
 
     //본문의 이미지 객체를 찾아야함.
     @NotNull
-    @Column(name = "image_path")
-    private String imagePath;
-
+    @Column(name = "card_image")
+    @OneToMany(mappedBy = "card")
+    private List<Image> cardImage = new ArrayList<>();
 }

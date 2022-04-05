@@ -70,7 +70,7 @@ public class SignUpService {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         userDto.setUserPw(passwordEncoder.encode(userDto.getUserPw()));
-        userDto.setUserAuth("User");
+        //userDto.setUserAuth("User");
         userDto.setAppendDate(localTime);
         userDto.setUpdateDate(localTime);
         user.setUserField(userDto);

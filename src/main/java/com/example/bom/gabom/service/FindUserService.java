@@ -38,14 +38,12 @@ public class FindUserService {
     //넘겨 받은 객체로 이메일을 통해 유저 정보를 얻어서 비밀번호를 업데이트한다.
     @Transactional
     public boolean setPassword(UserAuthDto userAuthDto){
-        User user;
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        user = userRepository.findByEmail(userAuthDto.getEmail());
 
-        userRepository.updatePassWord(encoder.encode(userAuthDto.getPassword()), user.getUserNo());
+        userRepository.updatePassWord(encoder.encode(userAuthDto.getPassword()), userRepository.findByEmail(userAuthDto.getEmail()).getUserNo());
 
-        if(encoder.matches(userAuthDto.getPassword(), user.getUserPw()))
+        if(encoder.matches(userAuthDto.getPassword(), userRepository.findByEmail(userAuthDto.getEmail()).getUserPw()))
             return true;
 
         return false;

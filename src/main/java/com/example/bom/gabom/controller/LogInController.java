@@ -24,6 +24,7 @@ public class LogInController {
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody LoginDto loginDto, HttpSession session, BindingResult bindingResult){
         User user = null;
+        boolean isLoggined = true;
 
         if(bindingResult.hasErrors())
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -35,8 +36,10 @@ public class LogInController {
             e.printStackTrace();
             return new ResponseEntity<>("오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        if (user == null)
+            isLoggined = false;
         //주입 상태에 따라 출력값 다르게(로그인할 아이디가 없는 경우
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(isLoggined, HttpStatus.OK);
     }
 
     @PostMapping("/logout")

@@ -1,4 +1,4 @@
-package com.example.bom.gabom;
+package com.example.bom.gabom.configuration;
 
 import io.swagger.annotations.Api;
 import org.springframework.context.annotation.Bean;
