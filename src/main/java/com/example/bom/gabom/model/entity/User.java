@@ -3,13 +3,9 @@ package com.example.bom.gabom.model.entity;
 import com.example.bom.gabom.model.dto.UserDto;
 import lombok.*;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
@@ -57,8 +53,8 @@ public class User{
 
     //유저 프로필이 저장될 경로
     //@NotNull
-    @Column(name = "profile_image_path")
-    private String profileImagePath;
+    @Column(name = "profile_image")
+    private Image profileImage;
     //유저를 팔로우한 사람 수
     //@NotNull
     private Integer following;

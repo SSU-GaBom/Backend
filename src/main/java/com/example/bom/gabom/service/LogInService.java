@@ -27,7 +27,7 @@ public class LogInService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = null;
 
-        if(passwordEncoder.matches(userRepository.findByUserId(loginid).getUserPw(), passwd)){
+        if(passwordEncoder.matches(passwd, userRepository.findByUserId(loginid).getUserPw())) {
             user = userRepository.findByUserId(loginid);
 
             createSession(user, session);

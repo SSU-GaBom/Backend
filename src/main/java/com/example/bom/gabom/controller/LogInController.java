@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 public class LogInController {
 
-    LogInService logInService;
+    private final LogInService logInService;
 
     //checkId로 post할 때 json으로 넘어오므로 hashmap으로 (key:userid, value:값)으로 파싱을 해줘야함.
     //User or String return
@@ -40,9 +40,7 @@ public class LogInController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity logout(HttpServletRequest request, HttpSession session1){
-        System.out.println(session1.getAttribute(SessionConstraints.Login_User));
-
+    public ResponseEntity logout(HttpServletRequest request){
         HttpSession session = request.getSession(false);
         if(session != null){
             session.invalidate();
