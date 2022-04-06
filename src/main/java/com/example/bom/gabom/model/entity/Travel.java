@@ -1,5 +1,8 @@
 package com.example.bom.gabom.model.entity;
 
+import com.example.bom.gabom.model.dto.travel.UpdateTravelDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -21,16 +24,13 @@ import java.util.List;
 public class Travel{
 
     @Id
-//    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "travel_id")
-    //카드 아이디는 "UserID" + "인덱스 번호"로 하면 될 듯?
     private Long travelId;
 
-    @ManyToOne
-//            (fetch = FetchType.LAZY)
-//    @JoinColumn(name = "user_no")
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no")
+    @JsonIgnore //순환참조 방지용인데 다른방식으로 해야하나?
     private User user;
 
 //    리뷰 내부의 핀 리스트
@@ -78,7 +78,7 @@ public class Travel{
     //여행 경비, 본문, 교통수단
     private Integer expense;
     private String content;
-    private Enum transportation;
+    private Transportation transportation;
 
 
 
@@ -116,5 +116,10 @@ public class Travel{
         travel.state = state;
         travel.city = city;
         return travel;
+    }
+    //업데이트
+    public void updateTravel(UpdateTravelDto updateTravelDto){
+        this.title = updateTravelDto.getTitle();
+        this.content = updateTravelDto.getContent();
     }
 }

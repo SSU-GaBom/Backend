@@ -1,5 +1,7 @@
 package com.example.bom.gabom.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +27,8 @@ public class User{
     //유저가 사용할 아이디
     @NotNull
     private String userId;
+
+
 //    비밀번호
     @NotNull
     private String userPw;
@@ -60,6 +64,7 @@ public class User{
     @OneToMany(mappedBy = "user")
 //            , cascade = CascadeType.ALL)
     @Column(name = "my_travel_list")
+    @JsonIgnore
     private List<Travel> myTravelList=new ArrayList<>();
 
 //    찜을 누른 리뷰 리스트
