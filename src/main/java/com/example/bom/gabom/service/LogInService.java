@@ -1,9 +1,9 @@
 package com.example.bom.gabom.service;
 
 import com.example.bom.gabom.etc.SessionConstraints;
-import com.example.bom.gabom.model.dto.LoginDto;
-import com.example.bom.gabom.model.entity.User;
-import com.example.bom.gabom.model.repository.UserRepository;
+import com.example.bom.gabom.dto.LoginDto;
+import com.example.bom.gabom.entity.User;
+import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,8 +27,8 @@ public class LogInService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = null;
 
-        if(passwordEncoder.matches(passwd, userRepository.findByUserId(loginid).getUserPw())) {
-            user = userRepository.findByUserId(loginid);
+        if(passwordEncoder.matches(passwd, userRepository.findByUserId(loginid).orElseThrow().getPassword())) {
+            user = userRepository.findByUserId(loginid).orElseThrow();
 
             createSession(user, session);
         }

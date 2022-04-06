@@ -1,41 +1,38 @@
 package com.example.bom.gabom.controller;
 
 import com.example.bom.gabom.advice.exception.CEmailSigninFailedException;
+import com.example.bom.gabom.advice.exception.CCheckIdFailedException;
 import com.example.bom.gabom.configuration.security.JwtTokenProvider;
-import com.example.bom.gabom.model.entity.User;
-import com.example.bom.gabom.model.repository.UserRepository;
+import com.example.bom.gabom.dto.UserDto;
+import com.example.bom.gabom.entity.User;
+import com.example.bom.gabom.repository.UserRepository;
 import com.example.bom.gabom.model.response.CommonResult;
 import com.example.bom.gabom.model.response.SingleResult;
 import com.example.bom.gabom.service.ResponseService;
+import com.example.bom.gabom.service.SignUpService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 
 @Api(tags = {"1. Sign"})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/v1")
+@RequestMapping(value = "/sign")
 public class SignController {
 
     private final UserRepository userRepository; // jpa 쿼리 활용
     private final JwtTokenProvider jwtTokenProvider; // jwt 토큰 생성
-    private final ResponseService responseService; // API 요청 결과에 대한 code, messageㅍ
+    private final ResponseService responseService; // API 요청 결과에 대한 code, message
     private final PasswordEncoder passwordEncoder; // 비밀번호 암호화
-
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+    private final SignUpService signUpService;
 
     @ApiOperation(value = "로그인", notes = "이메일 회원 로그인을 한다.")
     @PostMapping(value = "/signin")
@@ -51,17 +48,28 @@ public class SignController {
 
     @ApiOperation(value = "가입", notes = "회원가입을 한다.")
     @PostMapping(value = "/signup")
-    public CommonResult signup(@ApiParam(value = "회원ID : 이메일", required = true) @RequestParam String id,
-                               @ApiParam(value = "비밀번호", required = true) @RequestParam String password,
-                               @ApiParam(value = "이름", required = true) @RequestParam String name) {
-
-        userRepository.save(User.builder()
-                .userId(id)
-                .userPw(passwordEncoder.encode(password))
-                .userName(name)
-                .roles(Collections.singletonList("ROLE_USER"))
-                .build());
-
+    public CommonResult signup(@RequestBody UserDto userDto) {
+        signUpService.joinUser(userDto);
         return responseService.getSuccessResult();
     }
+
+    @ApiOperation(value = "id중복체크")
+    @PostMapping(value = "/checkid")
+    public CommonResult checkId(@RequestParam HashMap<String, String> userId){
+        if(!signUpService.checkId(userId.get("userId")))
+            throw new CCheckIdFailedException();
+        return responseService.getSuccessResult();
+    }
+
+    //CommonResult들은 json 안에 success로 boolean값이 있음. 아이디 중복체크, 이메일 체크 두개 모두 true로 넘겨 받았을 때 아이디 생성이 가능.
+//    @ApiOperation(value = "email 중복체크 및 email 인증")
+//    @PostMapping("/authemail")
+//    public CommonResult authEmail(@RequestParam HashMap<String, String> randNum,
+//                                    @RequestParam HashMap<String, String> email,
+//                                    HttpSession session) {
+//        if(signUpService.authMail(randNum.get("randnum"), email.get("email"), session)){
+//            return new ResponseEntity(true, HttpStatus.OK);
+//        }
+//        return new ResponseEntity(true, HttpStatus.OK);
+//    }
 }

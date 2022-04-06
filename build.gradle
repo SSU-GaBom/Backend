@@ -21,10 +21,12 @@ repositories {
 }
 
 dependencies {
-	// https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter
+	//implementation group: 'dev.akkinoc.util', name: 'yaml-resource-bundle', version: '2.3.1'
+	implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
 	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: '3.0.0'
+	implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.6.3'
 	implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
 	implementation group: 'org.springframework.security', name: 'spring-security-core', version: '5.6.1'

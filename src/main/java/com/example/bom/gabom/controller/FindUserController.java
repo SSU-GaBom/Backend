@@ -1,14 +1,12 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.dto.FindUserDto;
-import com.example.bom.gabom.model.dto.UserAuthDto;
-import com.example.bom.gabom.model.dto.UserDto;
-import com.example.bom.gabom.model.entity.User;
+import com.example.bom.gabom.dto.FindUserDto;
+import com.example.bom.gabom.dto.UserAuthDto;
+import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.service.FindUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;

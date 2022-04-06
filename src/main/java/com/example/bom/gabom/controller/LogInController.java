@@ -1,8 +1,7 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.etc.SessionConstraints;
-import com.example.bom.gabom.model.entity.User;
-import com.example.bom.gabom.model.dto.LoginDto;
+import com.example.bom.gabom.entity.User;
+import com.example.bom.gabom.dto.LoginDto;
 import com.example.bom.gabom.service.LogInService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

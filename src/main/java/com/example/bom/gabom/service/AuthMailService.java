@@ -1,8 +1,8 @@
 package com.example.bom.gabom.service;
 
-import com.example.bom.gabom.model.dto.FindUserDto;
-import com.example.bom.gabom.model.entity.User;
-import com.example.bom.gabom.model.repository.UserRepository;
+import com.example.bom.gabom.dto.FindUserDto;
+import com.example.bom.gabom.entity.User;
+import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -56,7 +56,7 @@ public class AuthMailService {
         //statusnum으로 1,2 인덱스 구분(야매임.)
         String[] info = new String[]{findUserDto.getEmail(), findUserDto.getUserName(), findUserDto.getUserId()};
 
-        User user = userRepository.findByEmail(info[0]);
+        User user = userRepository.findByEmail(info[0]).orElseThrow();
 
         if (user != null) {
             //6자리 랜덤 숫자

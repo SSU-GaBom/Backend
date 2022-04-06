@@ -1,9 +1,9 @@
 package com.example.bom.gabom.service;
 
-import com.example.bom.gabom.model.dto.FindUserDto;
-import com.example.bom.gabom.model.dto.UserAuthDto;
-import com.example.bom.gabom.model.entity.User;
-import com.example.bom.gabom.model.repository.UserRepository;
+import com.example.bom.gabom.dto.FindUserDto;
+import com.example.bom.gabom.dto.UserAuthDto;
+import com.example.bom.gabom.entity.User;
+import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,7 +31,7 @@ public class FindUserService {
         String sessrandnum = (String)session.getAttribute(email);
 
         if(sessrandnum.equals(randnum))
-            return userRepository.findByEmail(email);
+            return userRepository.findByEmail(email).orElseThrow();
         return null;
     }
 
@@ -41,9 +41,9 @@ public class FindUserService {
 
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        userRepository.updatePassWord(encoder.encode(userAuthDto.getPassword()), userRepository.findByEmail(userAuthDto.getEmail()).getUserNo());
+        userRepository.updatePassWord(encoder.encode(userAuthDto.getPassword()), userRepository.findByEmail(userAuthDto.getEmail()).orElseThrow().getUserNo());
 
-        if(encoder.matches(userAuthDto.getPassword(), userRepository.findByEmail(userAuthDto.getEmail()).getUserPw()))
+        if(encoder.matches(userAuthDto.getPassword(), userRepository.findByEmail(userAuthDto.getEmail()).orElseThrow().getUserPw()))
             return true;
 
         return false;

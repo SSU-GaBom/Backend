@@ -1,10 +1,9 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.dto.UserDto;
+import com.example.bom.gabom.dto.UserDto;
 import com.example.bom.gabom.service.SignUpService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
