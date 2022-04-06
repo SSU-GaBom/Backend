@@ -1,5 +1,6 @@
-package com.example.bom.gabom.model.entity;
+package com.example.bom.gabom.entity;
 
+import com.example.bom.gabom.model.entity.Card;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

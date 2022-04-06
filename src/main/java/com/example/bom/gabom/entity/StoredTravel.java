@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.entity;
+package com.example.bom.gabom.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,9 +17,9 @@ public class StoredTravel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "stored_travel_id")
     private Long storedTravelId;
-//
+
     //저장할 여행 리스트
-//    @OneToMany
-//    @JoinColumn(name = "travel_id")
-//    private List<Travel> travelList;
+    @OneToMany
+    @JoinColumn(name = "travel_id")
+    private List<Travel> travelList;
 }

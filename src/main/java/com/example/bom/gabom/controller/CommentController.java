@@ -1,7 +1,6 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.entity.Comment;
-import com.example.bom.gabom.model.entity.Travel;
+import com.example.bom.gabom.entity.Comment;
 import com.example.bom.gabom.repository.CommentRepository;
 import com.example.bom.gabom.repository.TravelRepository;
 import com.example.bom.gabom.service.CommentService;

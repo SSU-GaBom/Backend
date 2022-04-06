@@ -1,5 +1,6 @@
 package com.example.bom.gabom.model.entity;
 
+import com.example.bom.gabom.entity.Pin;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

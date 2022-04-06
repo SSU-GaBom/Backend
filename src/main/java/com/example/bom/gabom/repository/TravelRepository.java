@@ -1,6 +1,6 @@
 package com.example.bom.gabom.repository;
 
-import com.example.bom.gabom.model.entity.Travel;
+import com.example.bom.gabom.entity.Travel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

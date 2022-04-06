@@ -1,7 +1,7 @@
 package com.example.bom.gabom.controller;
 
-import com.example.bom.gabom.model.dto.travel.UpdateTravelDto;
-import com.example.bom.gabom.model.entity.Travel;
+import com.example.bom.gabom.dto.UpdateTravelDto;
+import com.example.bom.gabom.entity.Travel;
 import com.example.bom.gabom.repository.TravelRepository;
 import com.example.bom.gabom.service.TravelService;
 import lombok.RequiredArgsConstructor;

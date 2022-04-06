@@ -1,4 +1,4 @@
-package com.example.bom.gabom.model.entity;
+package com.example.bom.gabom.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

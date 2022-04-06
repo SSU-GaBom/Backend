@@ -1,8 +1,8 @@
 package com.example.bom.gabom.service;
 
-import com.example.bom.gabom.model.dto.travel.UpdateTravelDto;
-import com.example.bom.gabom.model.entity.Travel;
-import com.example.bom.gabom.model.entity.User;
+import com.example.bom.gabom.dto.UpdateTravelDto;
+import com.example.bom.gabom.entity.Travel;
+import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.repository.TravelRepository;
 import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,11 +23,12 @@ public class TravelService {
     private final UserRepository userRepository;
 
     @Transactional
-    public Travel save(String username, Travel travel){
+    public boolean save(String username, Travel travel){
         User user = userRepository.findByUserName(username);
           //만약 userName이 없으면? -> 에러처리. 근데 로그인세션으로 할거니까 그때 보고?하기.
         user.add(travel);
-        return travelRepository.save(travel);
+        travelRepository.save(travel);
+        return true;
     }
 
     public Travel travel_info(Long travelId) {

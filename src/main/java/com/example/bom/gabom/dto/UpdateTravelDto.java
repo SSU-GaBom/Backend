@@ -1,13 +1,9 @@
-package com.example.bom.gabom.model.dto.travel;
+package com.example.bom.gabom.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import javax.persistence.Column;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
