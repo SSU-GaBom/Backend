@@ -7,11 +7,14 @@ import com.example.bom.gabom.model.response.CommonResult;
 import com.example.bom.gabom.model.response.ListResult;
 import com.example.bom.gabom.model.response.SingleResult;
 import com.example.bom.gabom.service.ResponseService;
+import com.example.bom.gabom.service.UserService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Api(tags = {"2. User"}) // UserController를 대표하는 최상단 타이틀 영역에 표시될 값 세팅
 @RequiredArgsConstructor // class 내부의 final 객체는 Constructor Injection 수행, @Autowired도 가능
@@ -21,6 +24,7 @@ public class UserController {
 
     private final UserRepository userRepository; // Jpa를 활용한 CRUD 쿼리 가능
     private final ResponseService responseService; // 결과를 처리하는 Service
+    private final UserService userService;
 
     @ApiImplicitParams({
             @ApiImplicitParam(name = "X-AUTH-TOKEN", value = "로그인 성공 후 access_token",
@@ -74,5 +78,12 @@ public class UserController {
         userRepository.deleteById(msrl); // deleteById id를 받아 delete query 실행
         return responseService.getSuccessResult();
         // 성공 결과 정보만 필요한 경우 getSuccessResult()를 이용하여 결과를 출력
+    }
+
+    @GetMapping("/confirm-email")
+    public String viewConfirmEmail(@Valid @RequestParam  String token){
+        userService.confirmEmail(token);
+
+        return "redirect:/sign/signin";
     }
 }

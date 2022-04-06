@@ -1,8 +1,6 @@
 package com.example.bom.gabom.advice;
 
-import com.example.bom.gabom.advice.exception.CAuthenticationEntryPointException;
-import com.example.bom.gabom.advice.exception.CEmailSigninFailedException;
-import com.example.bom.gabom.advice.exception.CUserNotFoundException;
+import com.example.bom.gabom.advice.exception.*;
 import com.example.bom.gabom.model.response.CommonResult;
 import com.example.bom.gabom.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +38,24 @@ public class ExceptionAdvice {
         return responseService.getFailResult(Integer.valueOf(getMessage("userNotFound.code")), getMessage("userNotFound.msg"));
         // 예외 처리 메시지를 MessageSource에서 가져오도록 수정
         // getFailResult : setSuccess, setCode, setMsg
+    }
+
+    @ExceptionHandler(CEmailAuthTokenNotFoundException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult emailAuthTokenNotFound(HttpServletRequest request, CEmailAuthTokenNotFoundException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("emailAuthTokenNotFound.code")), getMessage("emailAuthTokenNotFound.msg"));
+    }
+
+    @ExceptionHandler(CCheckIdFailedException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult checkIdFailedException(HttpServletRequest request, CCheckIdFailedException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("checkIdFailed.code")), getMessage("checkIdFailed.msg"));
+    }
+
+    @ExceptionHandler(CUserEmailAlreadyExistsException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    protected CommonResult userEmailAlreadyExists(HttpServletRequest request, CUserEmailAlreadyExistsException e) {
+        return responseService.getFailResult(Integer.valueOf(getMessage("userEmailAlreadyExists.code")), getMessage("userEmailAlreadyExists.msg"));
     }
 
     @ExceptionHandler(CEmailSigninFailedException.class)
