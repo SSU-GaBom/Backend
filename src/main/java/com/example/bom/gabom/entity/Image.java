@@ -25,7 +25,7 @@ public class Image {
 
     //프로필 이미지로 사용할 때 사용하는 속성
     @OneToOne
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_no", nullable = true)
     private User user;
 
     //게시글 올릴 때 사용하는 속성

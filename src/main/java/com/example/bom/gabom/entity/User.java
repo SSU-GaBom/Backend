@@ -67,8 +67,9 @@ public class User implements UserDetails {
 
     //유저 프로필이 저장될 경로
     //@NotNull
-//    @OneToOne(mappedBy = "user")
-//    private Image profileImage;
+    @OneToOne(mappedBy = "user")
+    @Column(nullable = true)
+    private Image profileImage;
 
     //유저를 팔로우한 사람 수
     //@NotNull
