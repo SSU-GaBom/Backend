@@ -1,16 +1,16 @@
 package com.example.bom.gabom.advice.exception;
 
-public class CUserEmailAlreadyExistsException extends RuntimeException{
+public class CUserAlreadyExistsException extends RuntimeException{
 
-    public CUserEmailAlreadyExistsException(String msg, Throwable t) {
+    public CUserAlreadyExistsException(String msg, Throwable t) {
         super(msg, t);
     }
 
-    public CUserEmailAlreadyExistsException(String msg) {
+    public CUserAlreadyExistsException(String msg) {
         super(msg);
     }
 
-    public CUserEmailAlreadyExistsException() {
+    public CUserAlreadyExistsException() {
         super();
     }
 }

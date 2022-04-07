@@ -23,23 +23,6 @@ public class SignUpService {
     String localTime = format.format(time);
 
     @Transactional
-    public boolean checkId(String userId) {
-        //아이디가 존재하면 생성 불가
-        if (userRepository.existsByUserId(userId))
-            return false;
-        return true;
-    }
-
-    //이메일이 존재하는지 확인정도의 서비스
-    @Transactional
-    public Boolean checkEmail(String email) {
-        if (userRepository.existsByEmail(email))
-            return false;
-        return true;
-    }
-
-
-    @Transactional
     public void joinUser(UserDto userDto) {
         userRepository.save(User.builder()
                 .userId(userDto.getUserId())

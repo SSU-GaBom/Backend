@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class ConfirmationTokenService {
     private final ConfirmationTokenRepository confirmationTokenRepository;
     private final EmailService emailService;
-    private final JavaMailSender javaMailSender;
     /**
      * 이메일 인증 토큰 생성
      * @return
@@ -33,7 +32,7 @@ public class ConfirmationTokenService {
         mailMessage.setFrom("springgabom@gmail.com");
         mailMessage.setTo(receiverEmail);
         mailMessage.setSubject("회원가입 이메일 인증");
-        mailMessage.setText("http://localhost:8080/confirm-email?token="+emailConfirmationToken.getId());
+        mailMessage.setText("http://localhost:8080/confirmEmail?token="+emailConfirmationToken.getId());
         emailService.send(mailMessage);
 
         return emailConfirmationToken.getId();
@@ -47,5 +46,4 @@ public class ConfirmationTokenService {
     public ConfirmationToken findByIdAndExpirationDateAfterAndExpired(String confirmationTokenId){
         return confirmationTokenRepository.findByIdAndExpirationDateAfterAndExpired(confirmationTokenId, LocalDateTime.now(),false).orElseThrow((CEmailAuthTokenNotFoundException::new));
     };
-
 }

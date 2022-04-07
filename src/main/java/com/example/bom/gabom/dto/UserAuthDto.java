@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Data
 @RequiredArgsConstructor
 public class UserAuthDto {
-    String email;
-    String randNum;
-    String password;
+    private String email;
+    private String randNum;
+    private String password;
 }

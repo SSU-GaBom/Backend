@@ -14,7 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Api(tags = {"2. User"}) // UserController를 대표하는 최상단 타이틀 영역에 표시될 값 세팅
 @RequiredArgsConstructor // class 내부의 final 객체는 Constructor Injection 수행, @Autowired도 가능
@@ -80,10 +82,10 @@ public class UserController {
         // 성공 결과 정보만 필요한 경우 getSuccessResult()를 이용하여 결과를 출력
     }
 
-    @GetMapping("/confirm-email")
-    public String viewConfirmEmail(@Valid @RequestParam  String token){
+    @GetMapping("/confirmEmail")
+    public void viewConfirmEmail(@Valid @RequestParam  String token, HttpServletResponse response) throws IOException {
         userService.confirmEmail(token);
-
-        return "redirect:/sign/signin";
+        String redirect_uri="http://localhost:8080/sign/sginin";
+        response.sendRedirect(redirect_uri);
     }
 }

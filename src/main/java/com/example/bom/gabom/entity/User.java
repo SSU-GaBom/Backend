@@ -48,6 +48,7 @@ public class User implements UserDetails {
     //@NotNull
     private String userName;
 
+    @Column(unique = true)
     private String nickName;
 
     //userAuth??

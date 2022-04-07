@@ -1,16 +1,16 @@
 package com.example.bom.gabom.advice.exception;
 
-public class CCheckNickNameFailedException extends RuntimeException{
+public class CNickNameAlreadyExistsException extends RuntimeException{
 
-    public CCheckNickNameFailedException(String msg, Throwable t) {
+    public CNickNameAlreadyExistsException(String msg, Throwable t) {
         super(msg, t);
     }
 
-    public CCheckNickNameFailedException(String msg) {
+    public CNickNameAlreadyExistsException(String msg) {
         super(msg);
     }
 
-    public CCheckNickNameFailedException(){
+    public CNickNameAlreadyExistsException(){
         super();
     }
 

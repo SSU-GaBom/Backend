@@ -1,16 +1,16 @@
 package com.example.bom.gabom.advice.exception;
 
-public class CCheckIdFailedException extends RuntimeException{
+public class CUserIdAlreadyExistsException extends RuntimeException{
 
-    public CCheckIdFailedException(String msg, Throwable t) {
+    public CUserIdAlreadyExistsException(String msg, Throwable t) {
         super(msg, t);
     }
 
-    public CCheckIdFailedException(String msg) {
+    public CUserIdAlreadyExistsException(String msg) {
         super(msg);
     }
     
-    public CCheckIdFailedException(){
+    public CUserIdAlreadyExistsException(){
         super();
     }
 
