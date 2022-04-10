@@ -13,6 +13,7 @@ import com.example.bom.gabom.service.SignUpService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -22,6 +23,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/sign")
+@Slf4j
 public class SignController {
 
     private final ResponseService responseService; // API 요청 결과에 대한 code, message
@@ -41,7 +43,7 @@ public class SignController {
         if(!signUpService.checkEmail(userDto.getEmail())){
             throw new CUserEmailAlreadyExistsException();
         }
-        confirmationTokenService.createEmailConfirmationToken(userDto.getUserId(), userDto.getEmail());
+//        confirmationTokenService.createEmailConfirmationToken(userDto.getUserId(), userDto.getEmail());
         signUpService.joinUser(userDto);
         return responseService.getSuccessResult();
     }

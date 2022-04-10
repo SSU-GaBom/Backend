@@ -1,6 +1,11 @@
 package com.example.bom.gabom.repository;
 
+import com.example.bom.gabom.entity.Location;
+import com.example.bom.gabom.entity.Pin;
+import com.example.bom.gabom.entity.Travel;
+import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.model.entity.*;
+import com.example.bom.gabom.model.entity.Card;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,17 +33,12 @@ public class PinRepositoryTest {
     //각자 잘 연결 되는지 확인.
     @Test
     public void PinRepositoryTest() {
-        User createuser = new User("fish","123", "eee@naver.com", "sion", "auth", "2022-02-22", "2022-02-22", "path", 0);
+        User createuser = new User();
         userRepository.save(createuser);
 
         Travel travel2 = new Travel("Travel_title", true, 0, "goodstate", "goodcity");
         Travel travel3 = new Travel("Travel2_title", true, 1, "goo2dstate", "goo3city");
 
-        createuser.add(travel2);
-        createuser.add(travel3); //이게 작동이 안되는것같음.
-
-        travelRepository.save(travel2);
-        travelRepository.save(travel3);
         // given
         Location location = new Location();
         location.setAddress("서울시 마포구 10호");
@@ -57,11 +57,11 @@ public class PinRepositoryTest {
 
         Pin pin = new Pin();
         pin.setLocation(location); // 이걸 set말고 다르게?
-        pinRepository.save(pin);
+//        pinRepository.save(pin);
 
         Pin pin2 = new Pin();
         pin2.setLocation(location2); // 이걸 set말고 다르게?
-        pinRepository.save(pin2);
+//        pinRepository.save(pin2);
 
         Card card = new Card("마포여행꿀잼","path1");
         Card card2 = new Card("마포여행꿀잼2","path21");
@@ -71,13 +71,26 @@ public class PinRepositoryTest {
         pin.add(card2);
         pin2.add(card3);
 
+        //카드저장
         cardRepository.save(card);
         cardRepository.save(card2);
         cardRepository.save(card3);
         // when
 
+        //핀 저장
+        pinRepository.save(pin);
+        pinRepository.save(pin2);
+
         travel2.add(pin);
         travel2.add(pin2);
+
+
+
+        createuser.add(travel2);
+        createuser.add(travel3); //이게 작동이 안되는것같음.
+
+        travelRepository.save(travel2);
+        travelRepository.save(travel3);
         // then
         Assertions.assertThat(travel2.getPinList().size()).isEqualTo(2);
         Assertions.assertThat(travel2.getPinList().get(0).getLocation()

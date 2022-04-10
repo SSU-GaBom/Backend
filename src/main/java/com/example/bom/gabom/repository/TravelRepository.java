@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface TravelRepository extends JpaRepository<Travel, Long> {
     Travel findByTravelId(Long travelId);
 
+
     @Transactional
     void deleteByTravelId(Long travelId);
 

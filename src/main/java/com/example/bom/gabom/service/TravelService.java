@@ -6,6 +6,7 @@ import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.repository.TravelRepository;
 import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -46,15 +47,15 @@ public class TravelService {
         return true;
     }
 
-    public List<Travel> FindTravelsBypageRequest(Pageable pageable){
-        return travelRepository.findAll(pageable).getContent();
-    }
 
-    public List<Travel> FindTravels(){
-        return travelRepository.findAll();
+    public Page<Travel> TravelsByLikeCount(int Page,int Size){
+        PageRequest pageRequest = PageRequest.of(Page, Size, Sort.by(Sort.Direction.DESC, "likedCount"));
+        Page<Travel> memberPages = travelRepository.findAll(pageRequest);
+        return memberPages;
     }
 
 //    Pageable sortedByPriceDesc = PageRequest.of(0, 3, Sort.by("likeCount").descending());
+
 
 
     @Transactional

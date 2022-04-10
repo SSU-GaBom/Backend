@@ -1,5 +1,6 @@
 package com.example.bom.gabom.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -36,7 +37,7 @@ public class User implements UserDetails {
     private String userId;
     //비밀번호
     //@NotNull
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY) //잠시 없앰
     private String userPw;
     //이메일
     //@NotNull
@@ -79,21 +80,22 @@ public class User implements UserDetails {
     //내가 쓴 리뷰 리스트
     @OneToMany(mappedBy = "user")
     @Column(name = "my_travel_list")
+//    @JsonIgnore
     private List<Travel> myTravelList = new ArrayList<>();
 
     //찜을 누른 리뷰 리스트
-    @OneToMany
-    @JoinColumn(name = "travel_id")
-    @Column(name = "liked_travel_list")
-    private List<Travel> likedTravelList = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "travel_id")
+//    @Column(name = "liked_travel_list")
+//    private List<Travel> likedTravelList = new ArrayList<>();
 
     //내가 분류하여 저장한 리뷰 리스트(분류 자체로 리스트여야 하고 분류 후에도 리스트여야 해서 고민 해야함.)
 
 
 
-    @OneToMany
-    @JoinColumn(name = "stored_travel_id")
-    private List<StoredTravel> storedTravelList = new ArrayList<>();
+//    @OneToMany
+//    @JoinColumn(name = "stored_travel_id")
+//    private List<StoredTravel> storedTravelList = new ArrayList<>();
 
     //이건 유저 이름 리턴하는건데 getUsername 오버라이드 된 것 때문에 오류 생겨서 getter로 안되는 듯
     public String getUserName(){

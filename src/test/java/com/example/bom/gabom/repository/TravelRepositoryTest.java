@@ -1,7 +1,7 @@
 package com.example.bom.gabom.repository;
 
-import com.example.bom.gabom.model.entity.Travel;
-import com.example.bom.gabom.model.entity.User;
+import com.example.bom.gabom.entity.Travel;
+import com.example.bom.gabom.entity.User;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +24,8 @@ public class TravelRepositoryTest {
     @Test
     @DisplayName("왜 User_Travel끼리는 안됨?")
     public void context() {
-        User createuser = new User("fish","123", "eee@naver.com", "sion", "auth", "2022-02-22", "2022-02-22", "path", 0);
+        User createuser = new User();
+        createuser.setUserName("시온");
         userRepository.save(createuser);
         List<User> all1 = userRepository.findAll();
         for (User user : all1) {

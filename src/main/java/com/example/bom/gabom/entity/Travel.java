@@ -38,6 +38,7 @@ public class Travel{
 //    리뷰 내부의 핀 리스트
     @OneToMany(mappedBy = "travel")
     @Column(name = "pin_list")
+    @JsonIgnore
     private List<Pin> pinList=new ArrayList<>();
 
     //리뷰 제목
@@ -86,7 +87,7 @@ public class Travel{
 
     //user에 안들어가지는것같음.
 
-    //    연관 관계 편의 메소드
+//        연관 관계 편의 메소드
     public void add(Pin pin){
         pin.setTravel(this);
         this.pinList.add(pin);
