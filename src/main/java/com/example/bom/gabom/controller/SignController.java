@@ -17,7 +17,7 @@ import javax.mail.MessagingException;
 @Api(tags = {"1. Sign"})
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/sign")
+@RequestMapping(value = "/api/sign")
 public class SignController {
 
     private final ResponseService responseService; // API 요청 결과에 대한 code, message
@@ -44,7 +44,7 @@ public class SignController {
 
     //success값이 true 일 때만!
     @ApiOperation(value = "id중복체크")
-    @GetMapping(value = "/checkid")
+    @GetMapping(value = "/check-id")
     public CommonResult checkId(@RequestBody UserDto userDto){
         if(!checkService.checkId(userDto.getUserId()))
             throw new CUserIdAlreadyExistsException();
@@ -53,7 +53,7 @@ public class SignController {
 
     //success값이 true 일 때만!
     @ApiOperation(value = "닉네임 중복체크")
-    @GetMapping(value = "/checkNickname")
+    @GetMapping(value = "/check-nickname")
     public CommonResult checkNickName(@RequestBody UserDto userDto){
         if(!checkService.checkNickName(userDto.getNickName()))
             throw new CNickNameAlreadyExistsException();
