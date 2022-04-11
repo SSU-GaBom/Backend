@@ -6,10 +6,9 @@ import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
+@RequiredArgsConstructor
 //@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserDto {
 

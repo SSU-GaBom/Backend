@@ -2,19 +2,15 @@ package com.example.bom.gabom.controller;
 
 import com.example.bom.gabom.dto.FindUserDto;
 import com.example.bom.gabom.dto.UserAuthDto;
-import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.model.response.CommonResult;
 import com.example.bom.gabom.model.response.SingleResult;
 import com.example.bom.gabom.service.FindUserService;
 import com.example.bom.gabom.service.ResponseService;
 import com.example.bom.gabom.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @RestController
@@ -40,7 +36,7 @@ public class FindUserController {
         return findUserService.findPassword(findUserDto);
     }
 
-    //프론트에서 확인 비밀번호와 그냥 비밀번호가 같다면 이메일과 함께
+    //프론트에서 확인 비밀번호와 그냥 비밀번호가 같다면 이메일과 함께 -> 여긴 고쳐야함.
     @PostMapping("/changepw")
     public void changePw(@RequestParam String token, @RequestBody UserAuthDto userAuthDto, HttpServletResponse response) throws IOException {
         userService.confirmEmailChangePw(token, userAuthDto);

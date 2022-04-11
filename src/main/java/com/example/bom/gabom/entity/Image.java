@@ -8,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Image {

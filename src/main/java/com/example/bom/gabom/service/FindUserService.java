@@ -2,20 +2,17 @@ package com.example.bom.gabom.service;
 
 import com.example.bom.gabom.advice.exception.CUserNotFoundException;
 import com.example.bom.gabom.dto.FindUserDto;
-import com.example.bom.gabom.dto.UserAuthDto;
 import com.example.bom.gabom.entity.ConfirmationToken;
 import com.example.bom.gabom.entity.User;
 import com.example.bom.gabom.model.response.CommonResult;
-import com.example.bom.gabom.model.response.SingleResult;
 import com.example.bom.gabom.repository.ConfirmationTokenRepository;
 import com.example.bom.gabom.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 @Service
