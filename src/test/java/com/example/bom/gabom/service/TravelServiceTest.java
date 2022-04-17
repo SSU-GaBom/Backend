@@ -57,11 +57,39 @@ public class TravelServiceTest {
         System.out.println("FindTravel.getState() = " + FindTravel.getState());
         Thread.sleep(10000);
             //then
-            
-        
+
+
 //        assertThat(FindTravel).isEqualTo(travel2);
 //
 //        assertThat(FindTravel.getCity()).isEqualTo("goodcit2y");
+
+    }
+    @Test
+    public void PutPins () throws Exception {
+        //given
+        User createuser = new User();
+        createuser.setUserName("시온");
+        userRepository.save(createuser);
+        Travel travel2 = new Travel("Travel_title", true, 0, "goodstate", "goodcity");
+        Travel travel3 = new Travel("Travel2_title", true, 1, "goo2dstate", "goo3city");
+
+        createuser.add(travel2);
+        createuser.add(travel3);
+
+        //when
+        travelRepository.save(travel2);
+        travelRepository.save(travel3);
+
+        System.out.println("travel2.getTravelId() = " + travel2.getTravelId());
+        Thread.sleep(10000);
+        Travel FindTravel = travelService.travel_info(travel2.getTravelId());
+        Thread.sleep(10000);
+
+        System.out.println("FindTravel.getState() = " + FindTravel.getState());
+        Thread.sleep(10000);
+        //when
+
+        //then
 
     }
 
@@ -142,4 +170,14 @@ public class TravelServiceTest {
         System.out.println("end");
         // then
     }
+    @Test
+    public void Put_Pins_Card () throws Exception {
+        //given
+        
+        //when
+        
+        //then
+        
+    }
+
 }

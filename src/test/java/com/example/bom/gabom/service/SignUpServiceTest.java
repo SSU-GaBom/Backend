@@ -8,16 +8,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class SignUpServiceTest {
 
-    @Autowired
-    UserRepository userRepository;
 
-//    @Test
-//    public void LoginTest() {
-//        // given
-//        User user = new User();
-//        System.out.println("user = " + user);
-//        // when
-//
-//        // then
-//    }
 }
